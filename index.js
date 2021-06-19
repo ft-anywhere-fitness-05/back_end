@@ -5,7 +5,7 @@ require('dotenv').config();
 const server = require('./api/server');
 
 // server.use(cors());
-// server.use(express.static(path.join(__dirname, 'client/build'))); // static assets
+// server.use(express.static(path.join(__dirname, 'client/build'))); // static assetss
 
 if (process.env.NODE_ENV === 'production') {
 	console.log('this means this code is deployed');
