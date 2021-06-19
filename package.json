@@ -1,7 +1,6 @@
 {
 	"name": "back_end",
 	"version": "1.0.0",
-	"description": "",
 	"main": "index.js",
 	"scripts": {
 		"test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand",
@@ -24,8 +23,6 @@
 		"type": "git",
 		"url": "git+https://github.com/ft-anywhere-fitness-05/back_end.git"
 	},
-	"keywords": [],
-	"author": "",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/ft-anywhere-fitness-05/back_end/issues"

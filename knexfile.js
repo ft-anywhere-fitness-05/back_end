@@ -1,8 +1,5 @@
 require('dotenv').config();
 
-// PORT=7890
-// NODE_ENV=development
-
 const pg = require('pg');
 
 if (process.env.DATABASE_URL) {
@@ -17,12 +14,12 @@ const sharedConfig = {
 	},
 	seeds: {
 		directory: './data/seeds'
-	},
-	pool: {
-		afterCreate: (conn, done) => {
-			conn.run('PRAGMA foreign_keys = ON', done);
-		}
 	}
+	// pool: {
+	// 	afterCreate: (conn, done) => {
+	// 		conn.run('PRAGMA foreign_keys = ON', done);
+	// 	}
+	// }
 };
 
 module.exports = {
