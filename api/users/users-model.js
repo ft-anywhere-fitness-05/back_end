@@ -1,29 +1,36 @@
 const db = require('../../api/data/dbConfig');
 
-const findAll = () => {
+const findAllUsers = () => {
 	return db('users');
 };
 
-const findBy = filter => {
+const findUserBy = filter => {
 	return db('users').where(filter).first();
 };
 
-const findById = id => {
-	return db('users').where({ id }).first();
+const findUserById = user_id => {
+	return db('users').where({ user_id }).first();
 };
 
-async function addUser({ username, password }) {
+async function addUser({ username, password, authCode }) {
 	const [user_id] = await db('users').insert({
 		username: username,
-		password: password
+		password: password,
+		auth_level: authCode
 	});
-	return findById(user_id);
+	return findUserById(user_id);
 }
 
-async function removeUser(id) {
-	const userToBeDeleted = await findById(id);
-	await db('users').where({ id }).del();
+async function removeUser(user_id) {
+	const userToBeDeleted = await findUserById(user_id);
+	await db('users').where({ user_id }).del();
 	return userToBeDeleted;
 }
 
-module.exports = { findAll, findBy, findById, addUser, removeUser };
+module.exports = {
+	findAllUsers,
+	findUserBy,
+	findUserById,
+	addUser,
+	removeUser
+};

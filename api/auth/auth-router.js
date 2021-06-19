@@ -6,7 +6,8 @@ const Users = require('../users/users-model.js');
 const {
 	checkUsernameExists,
 	validateCredentials,
-	checkUsernameUnique
+	checkUsernameUnique,
+	validateAuthLevel
 } = require('../middleware/index');
 
 // REGISTER new user
@@ -14,6 +15,7 @@ router.post(
 	'/register',
 	validateCredentials,
 	checkUsernameUnique,
+	validateAuthLevel,
 	async (req, res, next) => {
 		let user = req.user;
 
@@ -21,7 +23,9 @@ router.post(
 		const rounds = process.env.BCRYPT_ROUNDS || 6;
 		const hash = bcrypt.hashSync(user.password, rounds);
 		user.password = hash;
+		console.log(hash);
 
+		console.log('USER to Register: ', user);
 		// add user to the db
 		Users.addUser(user)
 			.then(newUser => {
@@ -37,14 +41,16 @@ router.post(
 	validateCredentials,
 	checkUsernameExists,
 	(req, res, next) => {
-		const { username, password, id } = req.user;
+		const { username, password, user_id } = req.body;
 
+		//auth_level
 		// check if password is correct
 		if (bcrypt.compareSync(password, req.validUser.password)) {
 			const token = tokenBuilder({
-				id,
+				user_id,
 				username
 			});
+			console.log('TOLKEIN: ', token);
 			res.status(200).json({
 				message: `Welcome, ${username}!`,
 				token

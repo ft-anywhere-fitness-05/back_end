@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../secrets');
 
-module.exports = function (user) {
+module.exports = function ({ user_id, username }) {
 	const payload = {
-		subject: user.id,
-		username: user.username
+		subject: user_id,
+		username: username
 	};
 	const options = {
 		expiresIn: '1d'

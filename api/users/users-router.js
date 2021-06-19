@@ -1,13 +1,25 @@
 const router = require('express').Router();
-const { checkRole, restricted } = require('../middleware');
+const { restricted, only } = require('../middleware');
 const Users = require('./users-model');
 
-router.get('/', restricted, checkRole('admin'), (req, res, next) => {
-	Users.find()
+// admins can get a list of all the users
+// router.get('/', restricted, checkRole('admin'), (req, res, next) => {
+router.get('/', (req, res, next) => {
+	Users.findAllUsers()
 		.then(users => {
 			res.json(users);
 		})
-		.catch(next); // our custom err handling middleware in server.js will trap this
+		.catch(next);
+});
+
+// admins can get a specific user
+// router.get('/:id', restricted, checkRole('admin'), (req, res, next) => {
+router.get('/:id', (req, res, next) => {
+	Users.findUserById(req.params.id)
+		.then(user => {
+			res.status(200).json(user);
+		})
+		.catch(next);
 });
 
 module.exports = router;

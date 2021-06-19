@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../secrets');
+const { JWT_SECRET, AUTH_CODE } = require('../secrets');
 const Users = require('../users/users-model');
 
 function logger(req, res, next) {
@@ -63,7 +63,7 @@ const validateRoleName = async (req, res, next) => {
 // checks if username exists in database
 function checkUsernameExists(req, res, next) {
 	const { username } = req.user;
-	Users.findBy({ username })
+	Users.findUserBy({ username })
 		.then(user => {
 			if (user) {
 				req.validUser = user;
@@ -75,9 +75,38 @@ function checkUsernameExists(req, res, next) {
 		.catch(next);
 }
 
+// check is username and password meet criteria thresholds
+async function validateCredentials(req, res, next) {
+	const { username, password } = req.body;
+	if (
+		!username ||
+		username.trim() === '' ||
+		!password ||
+		password.trim() === ''
+	) {
+		next({ status: 400, message: 'username and password required' });
+	} else if (username.trim().length < 3 || username.trim().length > 25) {
+		next({
+			status: 400,
+			message: 'username must be between 3 and 25 chars'
+		});
+	} else if (password.trim().length < 3 || password.trim().length > 25) {
+		next({
+			status: 400,
+			message: 'password must be between 3 and 25 chars'
+		});
+	} else {
+		req.user = {
+			username: username.trim(),
+			password: password.trim()
+		};
+		next();
+	}
+}
+
 function checkUsernameUnique(req, res, next) {
 	const { username } = req.user;
-	Users.findBy({ username })
+	Users.findUserBy({ username })
 		.then(user => {
 			if (user) {
 				next({ status: 401, message: 'username taken' });
@@ -88,21 +117,14 @@ function checkUsernameUnique(req, res, next) {
 		.catch(next);
 }
 
-// check is username and password meet criteria thresh holds
-async function validateCredentials(req, res, next) {
-	let { username, password } = req.body;
-	if (
-		!username ||
-		username.trim() === '' ||
-		!password ||
-		password.trim() === ''
-	) {
-		next({ status: 400, message: 'username and password required' });
+// checks authorization code to see if new user qualifies as instructor
+async function validateAuthLevel(req, res, next) {
+	const { authCode } = req.body;
+	if (!authCode || authCode.trim() === '' || authCode.trim() !== AUTH_CODE) {
+		req.user.authCode = 'client';
+		next();
 	} else {
-		req.user = {
-			username: username.trim(),
-			password: password.trim()
-		};
+		req.user.authCode = 'instructor';
 		next();
 	}
 }
@@ -113,6 +135,7 @@ module.exports = {
 	validateRoleName,
 	checkUsernameUnique,
 	validateCredentials,
+	validateAuthLevel,
 	only,
 	logger
 };
