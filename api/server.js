@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
 const { logger } = require('./middleware/');
 const server = express();
 
@@ -6,6 +8,8 @@ const server = express();
 // const _Router = require('./_/_-router');
 
 // Configure your server here
+server.use(helmet());
+server.use(cors());
 server.use(express.json());
 
 server.use(logger);

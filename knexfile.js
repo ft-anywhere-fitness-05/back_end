@@ -1,6 +1,16 @@
-// DO NOT CHANGE THIS FILE
+require('dotenv').config();
+
+// PORT=7890
+// NODE_ENV=development
+
+const pg = require('pg');
+
+if (process.env.DATABASE_URL) {
+	pg.defaults.ssl = { rejectUnauthorized: false };
+}
+
 const sharedConfig = {
-	client: 'sqlite3',
+	client: 'pg',
 	useNullAsDefault: true,
 	migrations: {
 		directory: './data/migrations'
@@ -18,10 +28,15 @@ const sharedConfig = {
 module.exports = {
 	development: {
 		...sharedConfig,
-		connection: { filename: './data/auth.db3' }
+		connection: process.env.DEV_DATABASE_URL
 	},
 	testing: {
 		...sharedConfig,
-		connection: { filename: './data/testing.db3' }
+		connection: process.env.TESTING_DATABASE_URL
+	},
+	production: {
+		...sharedConfig,
+		connection: process.env.DATABASE_URL,
+		pool: { min: 2, max: 10 }
 	}
 };
