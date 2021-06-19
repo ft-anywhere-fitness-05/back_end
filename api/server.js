@@ -2,7 +2,7 @@ const express = require('express');
 const { logger } = require('./middleware/middleware');
 const server = express();
 
-// require routers: ex. below
+// routers
 // const _Router = require('./_/_-router');
 
 // Configure your server here
