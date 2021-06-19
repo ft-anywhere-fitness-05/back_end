@@ -7,8 +7,9 @@ const {
 	checkUsernameExists,
 	validateCredentials,
 	checkUsernameUnique
-} = require('../middleware/middleware');
+} = require('../middleware/index');
 
+// REGISTER new user
 router.post(
 	'/register',
 	validateCredentials,
@@ -30,6 +31,7 @@ router.post(
 	}
 );
 
+// LOGIN to system
 router.post(
 	'/login',
 	validateCredentials,
@@ -44,7 +46,7 @@ router.post(
 				username
 			});
 			res.status(200).json({
-				message: `welcome, ${username}`,
+				message: `Welcome, ${username}!`,
 				token
 			});
 		} else {

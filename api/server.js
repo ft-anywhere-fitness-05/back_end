@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const { logger } = require('./middleware/');
+const { logger } = require('./middleware/index');
 const server = express();
 
 // routers
-// const _Router = require('./_/_-router');
+const authRouter = require('./auth/auth-router');
 
 // Configure your server here
 server.use(helmet());
@@ -14,7 +14,7 @@ server.use(express.json());
 
 server.use(logger);
 
-// server.use('/api/_', _Router);
+server.use('/api/auth/auth-router', authRouter);
 
 server.use('*', (req, res) => {
 	res.status(404).send(`<p>Oops, can't find that!</p>`);
