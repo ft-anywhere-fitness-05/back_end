@@ -10,10 +10,10 @@ const sharedConfig = {
 	client: 'pg',
 	useNullAsDefault: true,
 	migrations: {
-		directory: './data/migrations'
+		directory: './api/data/migrations'
 	},
 	seeds: {
-		directory: './data/seeds'
+		directory: './api/data/seeds'
 	}
 	// pool: {
 	// 	afterCreate: (conn, done) => {

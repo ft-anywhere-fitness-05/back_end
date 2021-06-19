@@ -3,16 +3,16 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand",
+		"start": "node index.js",
 		"server": "nodemon index.js",
 		"migrate": "knex migrate:latest",
 		"rollback": "knex migrate:rollback",
 		"seed": "knex seed:run",
-		"start": "node index.js",
-		"migrateh": "heroku run knex migrate:latest -a ft-anywhere-fitness-05",
-		"rollbackh": "heroku run knex migrate:rollback -a ft-anywhere-fitness-05",
-		"seedh": "heroku run knex seed:run -a ft-anywhere-fitness-05",
-		"databaseh": "node index.js -a ft-anywhere-fitness-05",
+		"migrateh": "heroku run knex migrate:latest -a fitnessapplambda5",
+		"rollbackh": "heroku run knex migrate:rollback -a fitnessapplambda5",
+		"databaseh": "heroku pg:psql -a fitnessapplambda5",
+		"seedh": "heroku run knex seed:run -a fitnessapplambda5",
+		"test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand",
 		"deploy": "git push heroku main"
 	},
 	"engines": {
@@ -21,7 +21,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ft-anywhere-fitness-05/back_end.git"
+		"url": "git+https://github.com/fitnessapplambda5/back_end.git"
 	},
 	"license": "ISC",
 	"bugs": {
