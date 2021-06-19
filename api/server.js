@@ -10,10 +10,7 @@ server.use(express.json());
 
 server.use(logger);
 
-// Build routers ex. below ~ /api/actions/actions-router.js
-server.use('/api/actions', actionsRouter);
-
-// Do NOT `server.listen()` inside this file!
+// server.use('/api/_', _Router);
 
 server.use('*', (req, res) => {
 	res.status(404).send(`
@@ -24,9 +21,8 @@ server.use('*', (req, res) => {
 //error handling function for all middleware
 // eslint-disable-next-line
 server.use((err, req, res, next) => {
-	console.log('err handling middleware kicking in!', err.message);
 	res.status(err.status || 500).json({
-		custom: 'something exploded inside the app',
+		custom: 'Strange things are afoot at the circle K',
 		message: err.message,
 		stack: err.stack
 	});
