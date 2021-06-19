@@ -1,5 +1,5 @@
 const express = require('express');
-const { logger } = require('./middleware/middleware');
+const { logger } = require('./middleware/');
 const server = express();
 
 // routers
@@ -13,9 +13,7 @@ server.use(logger);
 // server.use('/api/_', _Router);
 
 server.use('*', (req, res) => {
-	res.status(404).send(`
-<p>Oops, can't find that!</p>
-`);
+	res.status(404).send(`<p>Oops, can't find that!</p>`);
 });
 
 //error handling function for all middleware
