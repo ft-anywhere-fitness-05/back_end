@@ -5,7 +5,7 @@ const findAllClasses = () => {
 };
 
 const findClassBy = filter => {
-	return db('classes').where(filter).first();
+	return db('classes').where(filter);
 };
 
 const findClassById = class_id => {

@@ -43,14 +43,13 @@ router.post(
 	(req, res, next) => {
 		const { username, password, user_id } = req.body;
 
-		//auth_level
 		// check if password is correct
 		if (bcrypt.compareSync(password, req.validUser.password)) {
 			const token = tokenBuilder({
 				user_id,
 				username
 			});
-			console.log('TOLKEIN: ', token);
+
 			res.status(200).json({
 				message: `Welcome, ${username}!`,
 				token

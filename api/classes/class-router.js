@@ -15,9 +15,16 @@ router.get('/', (req, res, next) => {
 // router.get('/:id', checkRole('admin'), (req, res, next) =>
 router.get('/:class_id', (req, res, next) => {
 	Classes.findClassById(req.params.class_id)
-		.then(ssalc => {
-			console.log(ssalc);
-			res.json(ssalc);
+		.then(singleClass => {
+			res.json(singleClass);
+		})
+		.catch(next);
+});
+
+router.get('/type/:type', (req, res, next) => {
+	Classes.findClassBy(req.params.type)
+		.then(classes => {
+			res.json(classes);
 		})
 		.catch(next);
 });

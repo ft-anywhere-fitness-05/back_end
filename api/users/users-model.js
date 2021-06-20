@@ -12,13 +12,17 @@ const findUserById = user_id => {
 	return db('users').where({ user_id }).first();
 };
 
-async function addUser({ username, password, authCode }) {
-	const [user_id] = await db('users').insert({
-		username: username,
-		password: password,
-		auth_level: authCode
-	});
-	return findUserById(user_id);
+// async function addUser(user) {
+function addUser(user) {
+	// const inserted = await db('users').insert(user, [
+	return db('users').insert(user, ['user_id', 'username', 'password']); // works with postgres ????
+	// return inserted;
+	// const [user_id] = await db('users').insert({
+	// 	username: username,
+	// 	password: password,
+	// 	auth_level: authCode
+	// });
+	// return findUserById(user_id);
 }
 
 async function removeUser(user_id) {

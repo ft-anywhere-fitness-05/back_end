@@ -25,42 +25,44 @@ const restricted = (req, res, next) => {
 };
 
 // checks role to see if user has access to desired location
-const only = role_name => (req, res, next) => {
-	console.log(`desired role_name: ${role_name}`);
-	console.log(`actual role_name: ${req.decodedJwt.role}`);
+const only = auth_level => (req, res, next) => {
+	console.log(`desired role_name: ${auth_level}`);
+	console.log(`actual role_name: ${req.decodedJwt.auth_level}`);
 
-	if (role_name === req.decodedJwt.role_name) {
+	if (auth_level === req.decodedJwt.auth_level) {
 		next();
 	} else {
 		next({
 			status: 403,
-			message: 'This is not for you'
+			message: 'Get off my lawn. You are not an instructor'
 		});
 	}
 };
 
-const validateRoleName = async (req, res, next) => {
-	let { role_name } = req.body;
-	if (!role_name || role_name.trim() === '') {
-		req.role_name = 'student';
-		next();
-	} else if (role_name.trim() === 'admin') {
-		next({ status: 422, message: 'Role name can not be admin' });
-	} else {
-		role_name = role_name.trim();
-		if (role_name.length > 32) {
-			next({
-				status: 422,
-				message: 'Role name can not be longer than 32 chars'
-			});
-		} else {
-			req.role_name = role_name;
-			next();
-		}
-	}
-};
+// don't need this??
+// const validateRoleName = async (req, res, next) => {
+// 	let { role_name } = req.body;
+// 	if (!role_name || role_name.trim() === '') {
+// 		req.role_name = 'student';
+// 		next();
+// 	} else if (role_name.trim() === 'admin') {
+// 		next({ status: 422, message: 'Role name can not be admin' });
+// 	} else {
+// 		role_name = role_name.trim();
+// 		if (role_name.length > 32) {
+// 			next({
+// 				status: 422,
+// 				message: 'Role name can not be longer than 32 chars'
+// 			});
+// 		} else {
+// 			req.role_name = role_name;
+// 			next();
+// 		}
+// 	}
+// };
 
 // checks if username exists in database
+
 function checkUsernameExists(req, res, next) {
 	const { username } = req.user;
 	Users.findUserBy({ username })
@@ -69,7 +71,10 @@ function checkUsernameExists(req, res, next) {
 				req.validUser = user;
 				next();
 			} else {
-				next({ status: 401, message: 'invalid credentials' });
+				next({
+					status: 401,
+					message: 'invalid credentials/username does not exist'
+				});
 			}
 		})
 		.catch(next);
@@ -132,7 +137,7 @@ async function validateAuthLevel(req, res, next) {
 module.exports = {
 	restricted,
 	checkUsernameExists,
-	validateRoleName,
+	// validateRoleName,
 	checkUsernameUnique,
 	validateCredentials,
 	validateAuthLevel,

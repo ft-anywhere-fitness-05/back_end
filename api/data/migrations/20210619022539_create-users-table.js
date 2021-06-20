@@ -1,24 +1,73 @@
 exports.up = function (knex) {
 	return knex.schema
+		.createTable('roles', roles => {
+			roles.increments('role_id');
+			roles.string('role_name', 128).unique().notNullable();
+		})
+		.createTable('types', types => {
+			types.increments('type_id');
+			types.string('type_name', 128).unique().notNullable();
+			types.text('type_description');
+		})
 		.createTable('users', users => {
 			users.increments('user_id');
-			users.text('username', 128).unique().notNullable();
-			users.text('password').notNullable();
-			users.text('auth_level').notNullable(); // client or instructor
+			users.string('username', 128).unique().notNullable();
+			users.string('password').notNullable();
+			users
+				.integer('role_id')
+				.unsigned()
+				.notNullable()
+				.references('role_id')
+				.inTable('roles')
+				.onDelete('RESTRICT')
+				.onUpdate('RESTRICT');
 		})
 		.createTable('classes', classes => {
 			classes.increments('class_id');
-			classes.text('name').unique().notNullable();
-			classes.text('type');
-			classes.text('start_time');
-			classes.text('duration');
-			classes.text('intensity_level');
-			classes.text('location');
-			classes.text('current_num_of_registered_attendees');
-			classes.text('max_class_size');
+			classes.string('class_name').notNullable();
+			classes.text('class_description');
+			classes.string('location').notNullable();
+			classes.date('date').notNullable(); // YYYY-MM-DD
+			classes.time('start_time').notNullable(); // hh:mm:ss[.nnnnnnn]
+			classes.time('duration').defaultTo('00:30:00').notNullable(); // hh:mm:ss[.nnnnnnn]
+			classes.integer('intensity').defaultTo('1').notNullable();
+			classes.integer('max_class_size').defaultTo('10').notNullable();
+			classes.integer('current_class_size').defaultTo('0').notNullable();
+			classes
+				.integer('type_id')
+				.unsigned()
+				.notNullable()
+				.references('type_id')
+				.inTable('types')
+				.onDelete('RESTRICT')
+				.onUpdate('RESTRICT');
+		})
+		.createTable('user_classes', table => {
+			table.increments('user_class_id');
+			table
+				.integer('user_id')
+				.unsigned()
+				.notNullable()
+				.references('user_id')
+				.inTable('users')
+				.onDelete('RESTRICT')
+				.onUpdate('RESTRICT');
+			table
+				.integer('class_id')
+				.unsigned()
+				.notNullable()
+				.references('class_id')
+				.inTable('classes')
+				.onDelete('RESTRICT')
+				.onUpdate('RESTRICT');
 		});
 };
 
 exports.down = function (knex) {
-	return knex.schema.dropTableIfExists('classes').dropTableIfExists('users');
+	return knex.schema
+		.dropTableIfExists('user_classes')
+		.dropTableIfExists('classes')
+		.dropTableIfExists('users')
+		.dropTableIfExists('types')
+		.dropTableIfExists('roles');
 };

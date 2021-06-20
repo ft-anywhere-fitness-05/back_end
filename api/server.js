@@ -18,10 +18,9 @@ server.use(express.json());
 server.use(logger);
 
 server.use('/api/auth/', authRouter);
+server.use('/api/classes/', classRouter);
 // server.use('/api/users/', restricted, userRouter); // to be used instead of below when all is working
 server.use('/api/users/', userRouter);
-// server.use('/api/classes/', restricted, classRouter); // to be used instead of below when all is working
-server.use('/api/classes/', classRouter);
 
 server.use('*', (req, res) => {
 	res.status(404).send(`<p>Oops, can't find that!</p>`);
