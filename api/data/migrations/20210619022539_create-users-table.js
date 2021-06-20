@@ -26,7 +26,7 @@ exports.up = function (knex) {
 			classes.string('class_name').unique().notNullable();
 			classes.text('class_description');
 			classes.string('location').notNullable();
-			classes.date('date').notNullable(); // YYYY-MM-DD
+			classes.date('date').notNullable(); // YYYY-MM-DD (?)
 			classes.time('start_time').notNullable(); // hh:mm:ss[.nnnnnnn]
 			classes.time('duration').defaultTo('00:30:00').notNullable(); // hh:mm:ss[.nnnnnnn]
 			classes.integer('intensity').defaultTo('1').notNullable();
