@@ -1,13 +1,8 @@
 exports.seed = function (knex) {
-	return knex('user-classes').insert([
+	return knex('user_classes').insert([
 		{
-			username: 'Josh'
-		},
-		{
-			username: 'Chris'
-		},
-		{
-			username: 'Daniel'
+			user_id: '1',
+			class_id: '1'
 		}
 	]);
 };

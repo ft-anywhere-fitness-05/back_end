@@ -1,34 +1,43 @@
 exports.seed = function (knex) {
 	return knex('classes').insert([
 		{
-			name: 'spin',
-			type: 'cardio',
-			start_time: '13:00',
-			duration: '60',
-			intensity_level: '4',
+			class_name: ' hot spin',
+			class_description:
+				'Stationary bike class in a heated room. Consult you doctor.',
 			location: 'Arlen',
-			current_num_of_registered_attendees: '4',
-			max_class_size: '5'
+			date: '2021-07-05',
+			start_time: '13:00:00',
+			duration: '00:30:00',
+			intensity: 5,
+			max_class_size: 5,
+			current_class_size: 3,
+			type_id: 7
 		},
 		{
-			name: 'hot_yoga',
-			type: 'yoga',
-			start_time: '14:00',
-			duration: '30',
-			intensity_level: '3',
+			class_name: 'hot yoga',
+			class_description:
+				'Yoga class in a heated room. Consult you doctor.',
 			location: 'Springwood',
-			current_num_of_registered_attendees: '1',
-			max_class_size: '5'
+			date: '2021-07-05',
+			start_time: '13:00:00',
+			duration: '00:30:00',
+			intensity: 4,
+			max_class_size: 5,
+			current_class_size: 1,
+			type_id: 1
 		},
 		{
-			name: 'hip_hop_dance',
-			type: 'dance',
-			start_time: '15:00',
-			duration: '1 hr',
-			intensity_level: '2',
-			location: 'Springfield',
-			current_num_of_registered_attendees: '5',
-			max_class_size: '5'
+			class_name: 'hip hop dance',
+			class_description:
+				'Stationary bike class in a heated room. Consult you doctor.',
+			location: 'Arlen',
+			date: '2021-07-05',
+			start_time: '13:00:00',
+			duration: '00:30:00',
+			intensity: 3,
+			max_class_size: 2,
+			current_class_size: 2,
+			type_id: 2
 		}
 	]);
 };

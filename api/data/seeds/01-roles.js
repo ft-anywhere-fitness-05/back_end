@@ -1,13 +1,10 @@
 exports.seed = function (knex) {
 	return knex('roles').insert([
 		{
-			username: 'Josh'
+			role_name: 'client'
 		},
 		{
-			username: 'Chris'
-		},
-		{
-			username: 'Daniel'
+			role_name: 'instructor'
 		}
 	]);
 };

@@ -7,7 +7,6 @@ exports.up = function (knex) {
 		.createTable('types', types => {
 			types.increments('type_id');
 			types.string('type_name', 128).unique().notNullable();
-			types.text('type_description');
 		})
 		.createTable('users', users => {
 			users.increments('user_id');
@@ -31,7 +30,7 @@ exports.up = function (knex) {
 			classes.time('start_time').notNullable(); // hh:mm:ss[.nnnnnnn]
 			classes.time('duration').defaultTo('00:30:00').notNullable(); // hh:mm:ss[.nnnnnnn]
 			classes.integer('intensity').defaultTo('1').notNullable();
-			classes.integer('max_class_size').defaultTo('10').notNullable();
+			classes.integer('max_class_size').defaultTo('5').notNullable();
 			classes.integer('current_class_size').defaultTo('0').notNullable();
 			classes
 				.integer('type_id')
@@ -42,9 +41,9 @@ exports.up = function (knex) {
 				.onDelete('RESTRICT')
 				.onUpdate('RESTRICT');
 		})
-		.createTable('user_classes', table => {
-			table.increments('user_class_id');
-			table
+		.createTable('user_classes', user_classes => {
+			user_classes.increments('user_class_id');
+			user_classes
 				.integer('user_id')
 				.unsigned()
 				.notNullable()
@@ -52,7 +51,7 @@ exports.up = function (knex) {
 				.inTable('users')
 				.onDelete('RESTRICT')
 				.onUpdate('RESTRICT');
-			table
+			user_classes
 				.integer('class_id')
 				.unsigned()
 				.notNullable()

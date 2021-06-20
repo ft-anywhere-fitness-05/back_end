@@ -1,13 +1,34 @@
 exports.seed = function (knex) {
 	return knex('types').insert([
 		{
-			username: 'Josh'
+			type_name: 'yoga'
 		},
 		{
-			username: 'Chris'
+			type_name: 'dance'
 		},
 		{
-			username: 'Daniel'
+			type_name: 'HIIT'
+		},
+		{
+			type_name: 'full body fusion'
+		},
+		{
+			type_name: 'circuit training'
+		},
+		{
+			type_name: 'water aerobics'
+		},
+		{
+			type_name: 'cycling'
+		},
+		{
+			type_name: 'bootcamp'
+		},
+		{
+			type_name: 'conditioning'
+		},
+		{
+			type_name: 'kickboxing'
 		}
 	]);
 };

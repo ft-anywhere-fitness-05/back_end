@@ -23,9 +23,7 @@ router.post(
 		const rounds = process.env.BCRYPT_ROUNDS || 6;
 		const hash = bcrypt.hashSync(user.password, rounds);
 		user.password = hash;
-		console.log(hash);
 
-		console.log('USER to Register: ', user);
 		// add user to the db
 		Users.addUser(user)
 			.then(newUser => {

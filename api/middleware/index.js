@@ -114,7 +114,7 @@ function checkUsernameUnique(req, res, next) {
 	Users.findUserBy({ username })
 		.then(user => {
 			if (user) {
-				next({ status: 401, message: 'username taken' });
+				next({ status: 401, message: 'Username taken' });
 			} else {
 				next();
 			}
@@ -126,10 +126,10 @@ function checkUsernameUnique(req, res, next) {
 async function validateAuthLevel(req, res, next) {
 	const { authCode } = req.body;
 	if (!authCode || authCode.trim() === '' || authCode.trim() !== AUTH_CODE) {
-		req.user.authCode = 'client';
+		req.user.role_id = 1; // client
 		next();
 	} else {
-		req.user.authCode = 'instructor';
+		req.user.role_id = 2; // instructor
 		next();
 	}
 }
