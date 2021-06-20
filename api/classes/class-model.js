@@ -28,25 +28,20 @@ function updateClass(class_id, updates) {
 		});
 }
 
-async function addClass({
-	name,
-	start_time,
-	duration,
-	intensity_level,
-	location,
-	current_num_of_registered_attendees,
-	max_class_size
-}) {
-	const [class_id] = await db('classes').insert({
-		name,
-		start_time,
-		duration,
-		intensity_level,
-		location,
-		current_num_of_registered_attendees,
-		max_class_size
-	});
-	return findClassById(class_id);
+async function addClass(newClass) {
+	return db('classes').insert(newClass, [
+		'class_id',
+		'class_name',
+		'class_description',
+		'location',
+		'date',
+		'start_time',
+		'duration',
+		'intensity',
+		'max_class_size',
+		'current_class_size',
+		'type_id'
+	]);
 }
 
 async function removeClass(class_id) {

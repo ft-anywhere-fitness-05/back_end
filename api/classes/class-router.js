@@ -30,10 +30,17 @@ router.get('/type', (req, res, next) => {
 
 // instructor can create a class // NEEDS RESTRICTIONS
 router.post('/', (req, res, next) => {
-	res.json('create working');
+	Classes.addClass(req.body)
+		.then(newClass => {
+			res.status(200).json({
+				message: 'Class created',
+				updatedClass: newClass
+			});
+		})
+		.catch(next);
 });
 
-// instructor can change/update a class // NEEDS RESTRICTIONS
+// instructor can change/update a class // GOOD but NEEDS RESTRICTIONS
 router.patch('/:class_id', (req, res, next) => {
 	Classes.updateClass(req.params.class_id, req.body)
 		.then(updatedClass => {
