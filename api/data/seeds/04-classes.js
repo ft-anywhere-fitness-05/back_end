@@ -29,7 +29,7 @@ exports.seed = function (knex) {
 		{
 			class_name: 'hip hop dance',
 			class_description:
-				'Stationary bike class in a heated room. Consult you doctor.',
+				'Dancing in the hip hop style in a heated room. Consult you doctor. Also, I think our air conditioner is broken',
 			location: 'Arlen',
 			date: '2021-07-05',
 			start_time: '13:00:00',

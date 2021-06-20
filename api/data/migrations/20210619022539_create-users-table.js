@@ -23,7 +23,7 @@ exports.up = function (knex) {
 		})
 		.createTable('classes', classes => {
 			classes.increments('class_id');
-			classes.string('class_name').notNullable();
+			classes.string('class_name').unique().notNullable();
 			classes.text('class_description');
 			classes.string('location').notNullable();
 			classes.date('date').notNullable(); // YYYY-MM-DD
