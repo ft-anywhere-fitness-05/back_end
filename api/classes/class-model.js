@@ -8,6 +8,12 @@ const findClassBy = filter => {
 	return db('classes').where(filter);
 };
 
+const findClassByType = type => {
+	return db('classes as c')
+		.leftJoin('types as t', 'c.type_id', 't.type_id')
+		.where('t.type_name', type);
+};
+
 const findClassById = class_id => {
 	return db('classes').where({ class_id }).first();
 };
@@ -42,6 +48,7 @@ async function removeClass(class_id) {
 module.exports = {
 	findAllClasses,
 	findClassBy,
+	findClassByType,
 	findClassById,
 	addClass,
 	removeClass

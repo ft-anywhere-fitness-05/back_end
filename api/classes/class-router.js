@@ -21,8 +21,8 @@ router.get('/:class_id', (req, res, next) => {
 		.catch(next);
 });
 
-router.get('/type/:type', (req, res, next) => {
-	Classes.findClassBy(req.params.type)
+router.get('/type', (req, res, next) => {
+	Classes.findClassByType(req.body.type)
 		.then(classes => {
 			res.json(classes);
 		})
