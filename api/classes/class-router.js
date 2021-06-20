@@ -28,13 +28,13 @@ router.get('/type', (req, res, next) => {
 		.catch(next);
 });
 
-// instructor can create a class // NEEDS RESTRICTIONS
+// instructor can create a class // GOOD but NEEDS RESTRICTIONS
 router.post('/', (req, res, next) => {
 	Classes.addClass(req.body)
 		.then(newClass => {
 			res.status(200).json({
 				message: 'Class created',
-				updatedClass: newClass
+				updatedClass: newClass[0]
 			});
 		})
 		.catch(next);
@@ -52,7 +52,7 @@ router.patch('/:class_id', (req, res, next) => {
 		.catch(next);
 });
 
-// instructor can delete a class // NEEDS RESTRICTIONS
+// instructor can delete a class // GOOD but NEEDS RESTRICTIONS
 router.delete('/:class_id', (req, res, next) => {
 	Classes.removeClass(req.params.class_id)
 		.then(removedClass => {
