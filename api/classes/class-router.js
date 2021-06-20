@@ -28,19 +28,33 @@ router.get('/type', (req, res, next) => {
 		.catch(next);
 });
 
-// instructor can create a class
+// instructor can create a class // NEEDS RESTRICTIONS
 router.post('/', (req, res, next) => {
 	res.json('create working');
 });
 
-// instructor can change/update a class
+// instructor can change/update a class // NEEDS RESTRICTIONS
 router.patch('/:class_id', (req, res, next) => {
-	res.json('update working');
+	Classes.updateClass(req.params.class_id, req.body)
+		.then(updatedClass => {
+			res.status(201).json({
+				message: 'Class updated',
+				updatedClass: updatedClass
+			});
+		})
+		.catch(next);
 });
 
-// instructor can delete a class
-router.delete('/', (req, res, next) => {
-	res.json('delete working');
+// instructor can delete a class // NEEDS RESTRICTIONS
+router.delete('/:class_id', (req, res, next) => {
+	Classes.removeClass(req.params.class_id)
+		.then(removedClass => {
+			res.status(200).json({
+				message: 'Class removed',
+				removedClass: removedClass
+			});
+		})
+		.catch(next);
 });
 
 module.exports = router;

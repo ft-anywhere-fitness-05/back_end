@@ -18,8 +18,8 @@ exports.up = function (knex) {
 				.notNullable()
 				.references('role_id')
 				.inTable('roles')
-				.onDelete('RESTRICT')
-				.onUpdate('RESTRICT');
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
 		})
 		.createTable('classes', classes => {
 			classes.increments('class_id');
@@ -29,17 +29,29 @@ exports.up = function (knex) {
 			classes.date('date').notNullable(); // YYYY-MM-DD (?)
 			classes.time('start_time').notNullable(); // hh:mm:ss[.nnnnnnn]
 			classes.time('duration').defaultTo('00:30:00').notNullable(); // hh:mm:ss[.nnnnnnn]
-			classes.integer('intensity').defaultTo('1').notNullable();
-			classes.integer('max_class_size').defaultTo('5').notNullable();
-			classes.integer('current_class_size').defaultTo('0').notNullable();
+			classes
+				.integer('intensity')
+				.defaultTo('1')
+				.unsigned()
+				.notNullable();
+			classes
+				.integer('max_class_size')
+				.unsigned()
+				.defaultTo('5')
+				.notNullable();
+			classes
+				.integer('current_class_size')
+				.unsigned()
+				.defaultTo('0')
+				.notNullable();
 			classes
 				.integer('type_id')
 				.unsigned()
 				.notNullable()
 				.references('type_id')
 				.inTable('types')
-				.onDelete('RESTRICT')
-				.onUpdate('RESTRICT');
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
 		})
 		.createTable('user_classes', user_classes => {
 			user_classes.increments('user_class_id');
@@ -49,16 +61,16 @@ exports.up = function (knex) {
 				.notNullable()
 				.references('user_id')
 				.inTable('users')
-				.onDelete('RESTRICT')
-				.onUpdate('RESTRICT');
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
 			user_classes
 				.integer('class_id')
 				.unsigned()
 				.notNullable()
 				.references('class_id')
 				.inTable('classes')
-				.onDelete('RESTRICT')
-				.onUpdate('RESTRICT');
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
 		});
 };
 

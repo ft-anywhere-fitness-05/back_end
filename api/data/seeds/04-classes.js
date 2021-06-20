@@ -1,7 +1,7 @@
 exports.seed = function (knex) {
 	return knex('classes').insert([
 		{
-			class_name: ' hot spin',
+			class_name: 'hot spin',
 			class_description:
 				'Stationary bike class in a heated room. Consult you doctor.',
 			location: 'Arlen',
