@@ -1,7 +1,7 @@
 const db = require('../../api/data/dbConfig');
 
 const findAllUsers = () => {
-	return db('users');
+	return db('users').select('user_id', 'username');
 };
 
 const findUserBy = filter => {
@@ -9,7 +9,7 @@ const findUserBy = filter => {
 };
 
 const findUserById = user_id => {
-	return db('users').where({ user_id }).first();
+	return db('users').select('user_id', 'username').where({ user_id }).first();
 };
 
 // async function addUser(user) {

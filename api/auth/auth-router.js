@@ -27,7 +27,10 @@ router.post(
 		// add user to the db
 		Users.addUser(user)
 			.then(newUser => {
-				res.status(201).json(newUser);
+				res.status(200).json({
+					message: 'New User created',
+					newUser: newUser[0]
+				});
 			})
 			.catch(next);
 	}
