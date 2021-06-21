@@ -19,26 +19,6 @@ router.get('/:class_id', (req, res, next) => {
 		.catch(next);
 });
 
-// get a list of all the types of Classes by a certain Type: NOT CURRENTLY FUNCTIONAL
-router.get('/types', (req, res, next) => {
-	console.log('working');
-	Classes.findClassTypes()
-		.then(classTypes => {
-			res.status(200).json(classTypes);
-		})
-		.catch(next);
-});
-
-// get a list of all the Classes by a certain Type: NOT CURRENTLY FUNCTIONAL
-router.get('/types/5', (req, res, next) => {
-	// Classes.findClassByType(req.body.type)
-	// 	.then(classes => {
-	// 		res.json(classes);
-	// 	})
-	// 	.catch(next);
-	console.log('working');
-});
-
 // instructor can create a class // GOOD but NEEDS RESTRICTIONS
 router.post('/', (req, res, next) => {
 	Classes.addClass(req.body)
