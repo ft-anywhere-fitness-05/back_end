@@ -44,6 +44,10 @@ async function addClass(newClass) {
 	]);
 }
 
+function reserveSpotInClass(reservation) {
+	return db('user_class_id').insert(reservation, ['user_id', 'class_id']);
+}
+
 async function removeClass(class_id) {
 	const classToBeDeleted = await findClassById(class_id);
 	await db('classes').where('class_id', class_id).del();
@@ -57,5 +61,6 @@ module.exports = {
 	findClassById,
 	updateClass,
 	addClass,
+	reserveSpotInClass,
 	removeClass
 };

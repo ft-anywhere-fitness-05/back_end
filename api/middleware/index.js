@@ -134,9 +134,13 @@ async function validateAuthLevel(req, res, next) {
 	}
 }
 
+// checks authorization code to see if new user qualifies as instructor
+function checkifSpaceInClass(req, res, next) {}
+
 module.exports = {
 	restricted,
 	checkUsernameExists,
+	checkifSpaceInClass,
 	// validateRoleName,
 	checkUsernameUnique,
 	validateCredentials,
