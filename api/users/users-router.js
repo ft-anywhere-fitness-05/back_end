@@ -22,8 +22,4 @@ router.get('/:user_id', (req, res, next) => {
 		.catch(next);
 });
 
-// Instructors can update a user's info, NOT FINISHED
-// router.get('/:id', restricted, checkRole('admin'), (req, res, next) => {
-router.patch('/:user_id', (req, res, next) => {});
-
 module.exports = router;
