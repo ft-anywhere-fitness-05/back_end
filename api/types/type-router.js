@@ -3,11 +3,19 @@ const Types = require('./type-model');
 
 // get a list of all the Class Types
 router.get('/', (req, res, next) => {
-	Types.findAllTypes()
-		.then(classTypes => {
-			res.status(200).json(classTypes);
-		})
-		.catch(next);
+	if (req.body.type) {
+		Types.findClassesByType(req.body.type)
+			.then(classesByType => {
+				res.status(200).json(classesByType);
+			})
+			.catch(next);
+	} else {
+		Types.findAllTypes()
+			.then(classTypes => {
+				res.status(200).json(classTypes);
+			})
+			.catch(next);
+	}
 });
 
 // get a list of all the Class by type_id
