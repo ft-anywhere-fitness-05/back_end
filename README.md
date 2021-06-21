@@ -63,6 +63,57 @@ Auth Code to create a new instructor: 'steakOnAMonday'
 
 Logs in a user, receives a token for authorization
 
+## Register / Login
+
+### [POST] /api/auth/register
+
+Create a new user or instructor.
+Auth Code to create a new instructor: 'steakOnAMonday'
+
+> **_ Required information _**
+> username
+> password
+
+> **_ Optional information _**
+> AuthCode (to be recognized as an instructor: steakOnAMonday)
+> if no code or wrong code entered, role_id defaults to '1', aka 'client'
+
+<details>
+
+```JSON
+
+{
+	message: 'New User created',
+	newUser: {
+		user_id: 4,
+		username: Bart,
+		role: 'client'
+	}
+}
+```
+
+</details>
+
+##### [POST] /api/users/login
+
+Logs in a user, receives a token for authorization
+
+> **_ Required information _**
+> ~in body
+    > username
+    > password
+
+<details>
+
+```JSON
+{
+    "message": "Welcome, Michael!",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pY2hhZWwiLCJpYXQiOjE2MjQyNjY1MTcsImV4cCI6MTYyNDM1MjkxN30.zPy6jUxfLDj8YRZLTMp_scFC4FzY8tYcPh3IrlUJjF4"
+}
+```
+
+</details>
+
 ## Classes
 
 ##### [GET] /api/classes
@@ -303,53 +354,6 @@ See a specific user's information
 
 </details>
 
-##### [POST] /api/users/register
-
-Create a new user
-
-> **_ Required information _**
-> username
-> password
-
-> **_ Optional information _**
-> AuthCode (to be recognized as an instructor: steakOnAMonday)
-> if no code or wrong code entered, role_id defaults to '1', aka 'client'
-
-<details>
-
-```JSON
-{
-    "message": "New User created",
-    "newUser": {
-        "user_id": 7,
-        "username": "Edward",
-        "password": "$2a$06$v36NvfFYZHOXwdTmAT2BeOfbOye43.l1gcVqkc.y4mrPrfNywZfo.",
-        "role_id": 1
-    }
-}
-```
-
-</details>
-
-##### [POST] /api/users/login
-
-Logs in a user, receives a token for authorization
-
-> **_ Required information _**
-> username
-> password
-
-<details>
-
-```JSON
-{
-    "message": "Welcome, Michael!",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pY2hhZWwiLCJpYXQiOjE2MjQyNjY1MTcsImV4cCI6MTYyNDM1MjkxN30.zPy6jUxfLDj8YRZLTMp_scFC4FzY8tYcPh3IrlUJjF4"
-}
-```
-
-</details>
-
 ## Types
 
 ##### [GET] /api/types
@@ -463,7 +467,7 @@ Reserve a spot in a class
 
 ```JSON
 {
-    "message": "Reservation removed",
+    "message": "Spot Reserved",
     "updatedClass": {
         "class_id": 1,
         "class_name": "hot spin",
@@ -492,7 +496,7 @@ Remove a User's Reservation
 
 ```JSON
 {
-    "message": "Spot Reserved",
+    "message": "Reservation removed",
     "updatedClass": {
         "class_id": 1,
         "class_name": "hot spin",
