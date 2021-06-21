@@ -15,14 +15,14 @@ router.get('/', (req, res, next) => {
 // admins can get a specific user
 // router.get('/:id', restricted, checkRole('admin'), (req, res, next) => {
 router.get('/:user_id', (req, res, next) => {
-	Users.findUserById(req.params.id)
+	Users.findUserById(req.params.user_id)
 		.then(user => {
 			res.status(200).json(user);
 		})
 		.catch(next);
 });
 
-// can update a user's info NOT FINISHED
+// can update a user's info ONLY IF INSTRUCTOR, NOT FINISHED
 // router.get('/:id', restricted, checkRole('admin'), (req, res, next) => {
 router.patch('/:user_id', (req, res, next) => {});
 

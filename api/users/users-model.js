@@ -12,7 +12,6 @@ const findUserById = user_id => {
 	return db('users').select('user_id', 'username').where({ user_id }).first();
 };
 
-// async function addUser(user) {
 function addUser(user) {
 	return db('users').insert(user, [
 		'user_id',
