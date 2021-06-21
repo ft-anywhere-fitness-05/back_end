@@ -456,88 +456,55 @@ Create a new class type
 
 Reserve a spot in a class
 
-<details>
-
-```JSON
-[
-    {
-        "type_id": 1,
-        "type_name": "yoga"
-    },
-    {
-        "type_id": 2,
-        "type_name": "dance"
-    },
-    {
-        "type_id": 3,
-        "type_name": "HIIT"
-    },
-    {
-        "type_id": 4,
-        "type_name": "full body fusion"
-    },
-    {
-        "type_id": 5,
-        "type_name": "circuit training"
-    },
-    {
-        "type_id": 6,
-        "type_name": "water aerobics"
-    },
-    {
-        "type_id": 7,
-        "type_name": "cycling"
-    },
-    {
-        "type_id": 8,
-        "type_name": "bootcamp"
-    },
-    {
-        "type_id": 9,
-        "type_name": "conditioning"
-    },
-    {
-        "type_id": 10,
-        "type_name": "kickboxing"
-    }
-]
-```
-
-</details>
-
-##### [GET] /api/types/:type_id
-
-**_RESTRICTED ENDPOINT_**
-
-get a specific class type
-
-<details>
-
-```JSON
-    {
-        "type_id": 10,
-        "type_name": "kickboxing"
-    }
-```
-
-</details>
-
-##### [POST] /api/types
-
-Create a new class type
-
 > **_ Required information _**
-> unique type_name
-> must be an instructor
+> user_id, class_id in body
 
 <details>
 
 ```JSON
 {
-    "message": "Type created",
-    "updatedType": {
-        "type_id": 11,
-        "type_name": "MMA"
+    "message": "Reservation removed",
+    "updatedClass": {
+        "class_id": 1,
+        "class_name": "hot spin",
+        "class_description": "Stationary bike class in a heated room. Consult you doctor.",
+        "location": "Arlen",
+        "date": "2021-07-05T04:00:00.000Z",
+        "start_time": "13:59:00",
+        "duration": "00:30:00",
+        "intensity": 5,
+        "max_class_size": 5,
+        "current_class_size": 3,
+        "type_id": 7
+    }
+}
+```
+
+</details>
+
+##### [DELETE] /api/user-classes/:user_id/:class_id
+
+**_RESTRICTED ENDPOINT_**
+
+Remove a User's Reservation
+
+<details>
+
+```JSON
+{
+    "message": "Spot Reserved",
+    "updatedClass": {
+        "class_id": 1,
+        "class_name": "hot spin",
+        "class_description": "Stationary bike class in a heated room. Consult you doctor.",
+        "location": "Arlen",
+        "date": "2021-07-05T04:00:00.000Z",
+        "start_time": "13:59:00",
+        "duration": "00:30:00",
+        "intensity": 5,
+        "max_class_size": 5,
+        "current_class_size": 4,
+        "type_id": 7
     }
 }
 ```
