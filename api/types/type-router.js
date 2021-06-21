@@ -25,7 +25,7 @@ router.post('/', (req, res, next) => {
 		.then(newType => {
 			res.status(200).json({
 				message: 'Type created',
-				newClassType: newType[0]
+				newType: newType[0]
 			});
 		})
 		.catch(next);
