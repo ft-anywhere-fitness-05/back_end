@@ -29,7 +29,11 @@ router.post(
 			.then(newUser => {
 				res.status(200).json({
 					message: 'New User created',
-					newUser: newUser[0]
+					newUser: {
+						user_id: newUser[0].user_id,
+						username: newUser[0].username,
+						role: newUser[0].role_id === 2 ? 'instructor' : 'client'
+					}
 				});
 			})
 			.catch(next);
