@@ -365,7 +365,7 @@ Instructor can edit a class's information using the class_id
         "date": "2021-07-05T04:00:00.000Z",
         "start_time": "13:59:00",
         "duration": "00:30:00",
-        "intensity": 5,
+        "intensity": 6,
         "max_class_size": 5,
         "current_class_size": 3,
         "type_id": 7
@@ -453,7 +453,7 @@ See a specific user's information
  {
         "user_id": 5,
         "username": "Biff"
-    }
+ }
 ```
 
 </details>
@@ -545,7 +545,7 @@ Create a new class type
 ```JSON
 {
     "message": "Type created",
-    "updatedType": {
+    "newType": {
         "type_id": 11,
         "type_name": "MMA"
     }
@@ -565,7 +565,10 @@ Create a new class type
 Reserve a spot in a class
 
 > **_ Required information _**
-> user_id, class_id in body
+> {
+    user_id: "5",
+    class_id: "2"
+}
 
 <details>
 
