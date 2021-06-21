@@ -28,7 +28,7 @@ server.use('/api/user-classes/', userClassRouter);
 
 server.use('*', (req, res) => {
 	res.send(
-		`<h1><a href='https://fitnessapplambda5.herokuapp.com'>README</a> for the anywhere fitness API</h1>`
+		`<h1><a href='https://github.com/ft-anywhere-fitness-05/back_end/blob/main/README.md'>README</a> for the anywhere fitness API</h1>`
 	);
 });
 
