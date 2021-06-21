@@ -14,4 +14,16 @@ router.post('/', (req, res, next) => {
 		.catch(next);
 });
 
+router.delete('/:user_id/:class_id', (req, res, next) => {
+	const { user_id, class_id } = req.params;
+	UserClasses.removeUserReservation(user_id, class_id)
+		.then(updatedClass => {
+			req.status(200).json({
+				message: 'Reserved Cancelled',
+				updatedClass: updatedClass
+			});
+		})
+		.catch(next);
+});
+
 module.exports = router;

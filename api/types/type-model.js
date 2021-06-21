@@ -4,6 +4,7 @@ const findAllTypes = () => {
 	return db('types');
 };
 
+// get type property, say name
 const findClassesByTypeId = type_id => {
 	return db('types as t')
 		.join('classes as c', 't.type_id', 'c.type_id')
@@ -11,12 +12,12 @@ const findClassesByTypeId = type_id => {
 		.where('c.type_id', type_id);
 };
 
-async function addType(newType) {
+function addClassType(newType) {
 	return db('types').insert(newType, ['type_id', 'type_name']);
 }
 
 module.exports = {
 	findAllTypes,
 	findClassesByTypeId,
-	addType
+	addClassType
 };

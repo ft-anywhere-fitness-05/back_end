@@ -21,11 +21,11 @@ router.get('/:type_id', (req, res, next) => {
 
 // instructor can create a class type// GOOD but NEEDS RESTRICTIONS
 router.post('/', (req, res, next) => {
-	Types.addType(req.body.type)
+	Types.addClassType(req.body)
 		.then(newType => {
 			res.status(200).json({
 				message: 'Type created',
-				updatedType: newType[0]
+				newClassType: newType[0]
 			});
 		})
 		.catch(next);

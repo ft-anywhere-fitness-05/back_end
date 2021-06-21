@@ -192,13 +192,10 @@ Instructor can create a class
 
 **_RESTRICTED ENDPOINT_**
 
-Instructor can edit a classes's information using the class_id
+Instructor can edit a class's information using the class_id
 
 > **_ Required information _**
-> ?? Only information provided will update on class
-
-> **_ Optional information _**
-> ??
+> Only information provided will update on class
 
 <details>
 
