@@ -290,7 +290,7 @@ Create a new user
 
 > *** Optional information ***
 > AuthCode (to be recognized as an instructor: steakOnAMonday)
-> 
+> if no code or wrong code entered, role_id defaults to '1', aka 'client'
 
 <details>
 
