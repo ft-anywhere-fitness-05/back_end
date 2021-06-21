@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const UserClasses = require('./user-class-model');
 
-//  client can reserve a spot in a class // NOT READY but NEEDS RESTRICTIONS
+//  client can reserve a spot in a class // NOT READY, NEEDS RESTRICTIONS
 router.post('/', (req, res, next) => {
 	const { user_id, class_id } = req.body;
 	UserClasses.reserveSpotInClass(user_id, class_id)
