@@ -24,6 +24,12 @@ See a class's data at a :class_id
 
 Can search for classes by type
 
+### [GET] /api/classes/search
+
+**_RESTRICTED ENDPOINT_**
+
+Can search for classes by category
+
 ### [POST] /api/classes/
 
 **_RESTRICTED ENDPOINT_**
@@ -170,6 +176,102 @@ See the full array of classes
 
 </details>
 
+##### [GET] /api/classes/search
+
+**_RESTRICTED ENDPOINT_**
+
+See a list of classes by the search criteria
+
+> **_ Required information _**
+> ~in body
+     ```
+     { searchCriteria: "intensity" }
+     ```
+
+<details>
+
+```JSON
+[
+    {
+        "class_id": 3,
+        "class_name": "hip hop dance",
+        "class_description": "Dancing in the hip hop style in a heated room. Consult you doctor. Also, I think our air conditioner is broken",
+        "location": "Arlen",
+        "date": "2021-07-05T04:00:00.000Z",
+        "start_time": "15:00:00",
+        "duration": "00:30:00",
+        "intensity": 3,
+        "max_class_size": 2,
+        "current_class_size": 2,
+        "type_id": 2,
+        "type_name": "dance"
+    },
+    {
+        "class_id": 2,
+        "class_name": "hot yoga",
+        "class_description": "Yoga class in a heated room. Consult you doctor.",
+        "location": "Springwood",
+        "date": "2021-07-05T04:00:00.000Z",
+        "start_time": "13:00:00",
+        "duration": "00:30:00",
+        "intensity": 4,
+        "max_class_size": 5,
+        "current_class_size": 1,
+        "type_id": 1,
+        "type_name": "yoga"
+    },
+    {
+        "class_id": 1,
+        "class_name": "hot spin",
+        "class_description": "Stationary bike class in a heated room. Consult you doctor.",
+        "location": "Arlen",
+        "date": "2021-07-05T04:00:00.000Z",
+        "start_time": "14:00:00",
+        "duration": "00:30:00",
+        "intensity": 5,
+        "max_class_size": 5,
+        "current_class_size": 3,
+        "type_id": 7,
+        "type_name": "cycling"
+    }
+]
+```	
+</details>
+
+##### [GET] /api/classes/type
+
+**_RESTRICTED ENDPOINT_**
+
+See a list of classes by the type
+
+> **_ Required information _**
+> ~in body
+     ```
+     { type: "yoga" }
+     ```
+
+<details>
+
+```JSON
+[
+    {
+        "class_id": 2,
+        "class_name": "hot yoga",
+        "class_description": "Yoga class in a heated room. Consult you doctor.",
+        "location": "Springwood",
+        "date": "2021-07-05T04:00:00.000Z",
+        "start_time": "13:00:00",
+        "duration": "00:30:00",
+        "intensity": 4,
+        "max_class_size": 5,
+        "current_class_size": 1,
+        "type_id": 1,
+        "type_name": "yoga"
+    }
+]
+```	
+</details>
+
 ##### [GET] /api/classes/:class_id
 
 **_RESTRICTED ENDPOINT_**
@@ -205,15 +307,15 @@ Instructor can create a class
 > **_ Required information _**
 > class_name
 > location
-> date
-> start_time
-> duration
-> intensity
-> max_class_size
-> current_class_size
+> date		- YYYY/MM/DD
+> start_time	- HH:MM:SS
 > type_id
 
 > **_ Optional information _**
+> intensity		- positive integer, defaults to 1
+> max_class_size	- positive integer, defaults to 5
+> duration		- HH:MM:SS, defaults to 00:30:00
+> current_class_size	- positive integer, defaults to 0
 > class_description
 
 <details>
@@ -246,7 +348,9 @@ Instructor can create a class
 Instructor can edit a class's information using the class_id
 
 > **_ Required information _**
-> Only information provided will update on class
+> Only information provided in the body will update in selected class
+> { intensity: "6" }	- Works
+> { intensit: "6" }	- Does not work Works
 
 <details>
 
