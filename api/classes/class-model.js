@@ -4,9 +4,17 @@ const findAllClasses = () => {
 	return db('classes');
 };
 
-const findClassBy = filter => {
-	return db('classes').where(filter);
-};
+function findClassBy(filter) {
+	return db('classes as c')
+		.join('types as t', 'c.type_id', 't.type_id')
+		.orderBy(`${filter}`, 'asc');
+}
+
+function findClassByType(type) {
+	return db('classes as c')
+		.join('types as t', 'c.type_id', 't.type_id')
+		.where('type_name', type);
+}
 
 const findClassById = class_id => {
 	return db('classes').where({ class_id }).first();
@@ -51,6 +59,7 @@ module.exports = {
 	findAllClasses,
 	findClassBy,
 	findClassById,
+	findClassByType,
 	updateClass,
 	addClass,
 	reserveSpotInClass,

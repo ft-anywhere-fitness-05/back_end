@@ -1,6 +1,24 @@
 const router = require('express').Router();
 const Classes = require('./class-model');
 
+// get a list of all the Classes by criteria
+router.get('/search', (req, res, next) => {
+	Classes.findClassBy(req.body['searchCriteria'])
+		.then(classes => {
+			res.json(classes);
+		})
+		.catch(next);
+});
+
+// get a list of all the Classes by type
+router.get('/type', (req, res, next) => {
+	Classes.findClassByType(req.body['type'])
+		.then(classes => {
+			res.json(classes);
+		})
+		.catch(next);
+});
+
 // get a list of all the Classes
 router.get('/', (req, res, next) => {
 	Classes.findAllClasses()
