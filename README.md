@@ -1,62 +1,76 @@
 # Anywhere Fitness API
+
 ## https://fitnessapplambda5.herokuapp.com
+
 ### What To Know About This API
+
 I've made a LOT of endpoints. Some will be useful, some are just for reference. JSON examples listed underneath this list. Don't care about reference? These are the ones you want:
 
-
 ### [GET] /api/classes/
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 See the list of classes w/ data
 
 ### [GET] /api/classes/:class_id
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 See a class's data at a :class_id
 
 ### [GET] /api/classes/type
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 Can search for classes by type
 
 ### [POST] /api/classes/
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 Instructor can create a class
 
 ### [PATCH] /api/classes/:class_id
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 Instructor can edit a classes's information using the class_id
 
 ### [DELETE] /api/classes/:class_id
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 Instructor can remove a class using the class_id
 
 ### [GET] /api/users/
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 Instructor can see a list of users w/ information
 
 ### [GET] /api/users/:user_id
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 Instructor can see a specific user's information
 
 ### [POST] /api/auth/register
-Create a new user or intructor.
+
+Create a new user or instructor.
 Auth Code to create a new instructor: 'steakOnAMonday'
 
 ### [POST] /api/auth/login
+
 Logs in a user, receives a token for authorization
 
+## Classes
 
-## Plants
 ##### [GET] /api/classes
-***RESTRICTED ENDPOINT***
 
-See the full array of plants
+**_RESTRICTED ENDPOINT_**
+
+See the full array of classes
+
 <details>
 
 ```JSON
@@ -106,9 +120,11 @@ See the full array of plants
 </details>
 
 ##### [GET] /api/classes/:class_id
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 See the class's data at a :class_id
+
 <details>
 
 ```JSON
@@ -130,11 +146,12 @@ See the class's data at a :class_id
 </details>
 
 ##### [POST] /api/classes/
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 Instructor can create a class
 
-> *** Required information ***
+> **_ Required information _**
 > class_name
 > location
 > date
@@ -145,7 +162,7 @@ Instructor can create a class
 > current_class_size
 > type_id
 
-> *** Optional information ***
+> **_ Optional information _**
 > class_description
 
 <details>
@@ -172,14 +189,15 @@ Instructor can create a class
 </details>
 
 ##### [PATCH] /api/classes/:class_id
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 Instructor can edit a classes's information using the class_id
 
-> *** Required information ***
+> **_ Required information _**
 > ?? Only information provided will update on class
 
-> *** Optional information ***
+> **_ Optional information _**
 > ??
 
 <details>
@@ -206,9 +224,11 @@ Instructor can edit a classes's information using the class_id
 </details>
 
 ##### [DELETE] /api/classes/:class_id
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 Instructor can remove a class using the class_id
+
 <details>
 
 ```JSON
@@ -233,10 +253,13 @@ Instructor can remove a class using the class_id
 </details>
 
 ## Users
+
 ##### [GET] /api/users
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 See the full array of users
+
 <details>
 
 ```JSON
@@ -267,9 +290,11 @@ See the full array of users
 </details>
 
 ##### [GET] /api/users/:user_id
-***RESTRICTED ENDPOINT***
+
+**_RESTRICTED ENDPOINT_**
 
 See a specific user's information
+
 <details>
 
 ```JSON
@@ -282,13 +307,14 @@ See a specific user's information
 </details>
 
 ##### [POST] /api/users/register
+
 Create a new user
 
-> *** Required information ***
+> **_ Required information _**
 > username
 > password
 
-> *** Optional information ***
+> **_ Optional information _**
 > AuthCode (to be recognized as an instructor: steakOnAMonday)
 > if no code or wrong code entered, role_id defaults to '1', aka 'client'
 
@@ -309,9 +335,10 @@ Create a new user
 </details>
 
 ##### [POST] /api/users/login
+
 Logs in a user, receives a token for authorization
 
-> *** Required information ***
+> **_ Required information _**
 > username
 > password
 
