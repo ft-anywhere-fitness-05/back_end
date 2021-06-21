@@ -349,3 +349,197 @@ Logs in a user, receives a token for authorization
 ```
 
 </details>
+
+## Types
+
+##### [GET] /api/types
+
+**_RESTRICTED ENDPOINT_**
+
+See the full array of class types
+
+<details>
+
+```JSON
+[
+    {
+        "type_id": 1,
+        "type_name": "yoga"
+    },
+    {
+        "type_id": 2,
+        "type_name": "dance"
+    },
+    {
+        "type_id": 3,
+        "type_name": "HIIT"
+    },
+    {
+        "type_id": 4,
+        "type_name": "full body fusion"
+    },
+    {
+        "type_id": 5,
+        "type_name": "circuit training"
+    },
+    {
+        "type_id": 6,
+        "type_name": "water aerobics"
+    },
+    {
+        "type_id": 7,
+        "type_name": "cycling"
+    },
+    {
+        "type_id": 8,
+        "type_name": "bootcamp"
+    },
+    {
+        "type_id": 9,
+        "type_name": "conditioning"
+    },
+    {
+        "type_id": 10,
+        "type_name": "kickboxing"
+    }
+]
+```
+
+</details>
+
+##### [GET] /api/types/:type_id
+
+**_RESTRICTED ENDPOINT_**
+
+get a specific class type
+
+<details>
+
+```JSON
+    {
+        "type_id": 10,
+        "type_name": "kickboxing"
+    }
+```
+
+</details>
+
+##### [POST] /api/types
+
+Create a new class type
+
+> **_ Required information _**
+> unique type_name
+> must be an instructor
+
+<details>
+
+```JSON
+{
+    "message": "Type created",
+    "updatedType": {
+        "type_id": 11,
+        "type_name": "MMA"
+    }
+}
+```
+
+</details>
+
+## User-Classes
+
+**_ For making and deleting class reservations _**
+
+##### [POST] /api/user-classes
+
+**_RESTRICTED ENDPOINT_**
+
+Reserve a spot in a class
+
+<details>
+
+```JSON
+[
+    {
+        "type_id": 1,
+        "type_name": "yoga"
+    },
+    {
+        "type_id": 2,
+        "type_name": "dance"
+    },
+    {
+        "type_id": 3,
+        "type_name": "HIIT"
+    },
+    {
+        "type_id": 4,
+        "type_name": "full body fusion"
+    },
+    {
+        "type_id": 5,
+        "type_name": "circuit training"
+    },
+    {
+        "type_id": 6,
+        "type_name": "water aerobics"
+    },
+    {
+        "type_id": 7,
+        "type_name": "cycling"
+    },
+    {
+        "type_id": 8,
+        "type_name": "bootcamp"
+    },
+    {
+        "type_id": 9,
+        "type_name": "conditioning"
+    },
+    {
+        "type_id": 10,
+        "type_name": "kickboxing"
+    }
+]
+```
+
+</details>
+
+##### [GET] /api/types/:type_id
+
+**_RESTRICTED ENDPOINT_**
+
+get a specific class type
+
+<details>
+
+```JSON
+    {
+        "type_id": 10,
+        "type_name": "kickboxing"
+    }
+```
+
+</details>
+
+##### [POST] /api/types
+
+Create a new class type
+
+> **_ Required information _**
+> unique type_name
+> must be an instructor
+
+<details>
+
+```JSON
+{
+    "message": "Type created",
+    "updatedType": {
+        "type_id": 11,
+        "type_name": "MMA"
+    }
+}
+```
+
+</details>
