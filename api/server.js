@@ -27,7 +27,9 @@ server.use('/api/types/', typeRouter);
 server.use('/api/user-classes/', userClassRouter);
 
 server.use('*', (req, res) => {
-	res.status(404).send(`<p>Oops, can't find that!</p>`);
+	res.send(
+		`<h1><a href='https://fitnessapplambda5.herokuapp.com'>README</a> for the anywhere fitness API</h1>`
+	);
 });
 
 //error handling function for all middleware
