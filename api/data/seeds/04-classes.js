@@ -68,7 +68,7 @@ exports.seed = function (knex) {
 		{
 			class_name: 'Fusion Fitness',
 			class_description:
-				'Dancing in the hip hop style in a heated room. Consult you doctor. Also, I think our air conditioner is broken',
+				'Total body toning class in a heated room. Consult you doctor.',
 			location: '9806 Corona St. Fairmont, WV 26554',
 			date: '2021-09-01',
 			start_time: '09:00:00',
