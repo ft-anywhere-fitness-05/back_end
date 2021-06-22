@@ -38,12 +38,10 @@ router.post(
 		const { user_id, class_id } = req.body;
 		UserClasses.reserveSpotInClass({ user_id, class_id })
 			.then(updatedClass => {
-				console.log('got through reserveSpotInClass');
 				Classes.updateClass(class_id, {
 					current_class_size: (updatedClass.current_class_size += 1)
 				})
 					.then(updatedClass => {
-						console.log('got through updateClass');
 						res.status(200).json({
 							message: 'Spot Reserved',
 							updatedClass: updatedClass

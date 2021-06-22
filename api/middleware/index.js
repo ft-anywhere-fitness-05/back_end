@@ -35,7 +35,6 @@ function checkUsernameExists(req, res, next) {
 		.then(user => {
 			if (user) {
 				req.validUser = user;
-				console.log('Validated User: ', user);
 				next();
 			} else {
 				next({
@@ -57,7 +56,6 @@ function checkUserExistsById(req, res, next) {
 					message: 'User not found'
 				});
 			} else {
-				console.log('got to checkUserExistsById');
 				next();
 			}
 		})
@@ -194,7 +192,6 @@ function checkIfAlreadyEnrolled(req, res, next) {
 					message: 'Spot already reserved for this client'
 				});
 			} else {
-				console.log('got through checkIfAlreadyEnrolled');
 				next();
 			}
 		})
@@ -218,7 +215,6 @@ async function checkIfClassHasSpace(req, res, next) {
 				message: 'Sorry, the class is full'
 			});
 		} else {
-			console.log('got through checkIfClassHasSpace');
 			next();
 		}
 	}
