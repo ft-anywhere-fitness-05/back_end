@@ -22,8 +22,8 @@ router.get('/:user_id', (req, res, next) => {
 });
 
 //  client can reserve a spot in a class // GOOD, but NEEDS RESTRICTIONS
-// not already enrolled
-// class not yet full
+// not already enrolled - checkIfAlreadyEnrolled
+// class not yet full - checkIfClassHasSpace
 router.post('/', only, (req, res, next) => {
 	const { user_id, class_id } = req.body;
 	UserClasses.reserveSpotInClass({ user_id, class_id })
