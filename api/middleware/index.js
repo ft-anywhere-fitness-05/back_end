@@ -17,7 +17,6 @@ const restricted = (req, res, next) => {
 			} else {
 				req.decodedJwt = decoded;
 				next();
-		
 			}
 		});
 	} else {
@@ -101,8 +100,6 @@ async function validateAuthLevel(req, res, next) {
 
 // checks role to see if user has access to desired location
 function only(req, res, next) {
-	// console.log(`desired role_name: ${auth_level}`);
-	// console.log(`actual role_name: `, req.decodedJwt);
 	if (req.decodedJwt.role_name === 'instructor') {
 		next();
 	} else {
@@ -114,40 +111,17 @@ function only(req, res, next) {
 }
 
 // checks authorization code to see if new user qualifies as instructor
-//also need to adjust class size based on enrolement
+//also need to adjust class size based on enrollment
 function checkIfSpaceInClass(req, res, next) {}
-
-// don't need this??
-// const validateRoleName = async (req, res, next) => {
-// 	let { role_name } = req.body;
-// 	if (!role_name || role_name.trim() === '') {
-// 		req.role_name = 'student';
-// 		next();
-// 	} else if (role_name.trim() === 'admin') {
-// 		next({ status: 422, message: 'Role name can not be admin' });
-// 	} else {
-// 		role_name = role_name.trim();
-// 		if (role_name.length > 32) {
-// 			next({
-// 				status: 422,
-// 				message: 'Role name can not be longer than 32 chars'
-// 			});
-// 		} else {
-// 			req.role_name = role_name;
-// 			next();
-// 		}
-// 	}
-// };
 
 module.exports = {
 	only,
 	restricted,
 	checkUsernameExists,
 	checkIfSpaceInClass,
-	// validateRoleName,
 	checkUsernameUnique,
 	validateCredentials,
 	validateAuthLevel,
-	
+
 	logger
 };
