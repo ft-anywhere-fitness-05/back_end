@@ -24,7 +24,7 @@ async function reserveSpotInClass({ user_id, class_id }) {
 		'user_id',
 		'class_id'
 	]);
-	return db('classes').where('classes.class_id', class_id);
+	return db('classes').where('classes.class_id', class_id).first();
 }
 
 async function removeUserReservation(user_id, class_id) {

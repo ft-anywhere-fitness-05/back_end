@@ -49,7 +49,7 @@ function checkUsernameExists(req, res, next) {
 
 function checkUserExistsById(req, res, next) {
 	const { user_id } = req.params;
-	Users.findUserById(user_id)
+	Users.findUserById(user_id || req.body.user_id)
 		.then(user => {
 			if (!user) {
 				next({
@@ -57,7 +57,7 @@ function checkUserExistsById(req, res, next) {
 					message: 'User not found'
 				});
 			} else {
-				console.log('got to the middleware');
+				console.log('got to checkUserExistsById');
 				next();
 			}
 		})
@@ -194,6 +194,7 @@ function checkIfAlreadyEnrolled(req, res, next) {
 					message: 'Spot already reserved for this client'
 				});
 			} else {
+				console.log('got through checkIfAlreadyEnrolled');
 				next();
 			}
 		})
@@ -217,6 +218,7 @@ async function checkIfClassHasSpace(req, res, next) {
 				message: 'Sorry, the class is full'
 			});
 		} else {
+			console.log('got through checkIfClassHasSpace');
 			next();
 		}
 	}
