@@ -22,8 +22,9 @@ router.get('/:user_id', (req, res, next) => {
 });
 
 //  client can reserve a spot in a class // GOOD, but NEEDS RESTRICTIONS
-// not already enrolled - checkIfAlreadyEnrolled
-// class not yet full - checkIfClassHasSpace
+// 1. not already enrolled - checkIfAlreadyEnrolled
+// 2. class not yet full - checkIfClassHasSpace
+// 3. update class attendance
 router.post('/', only, (req, res, next) => {
 	const { user_id, class_id } = req.body;
 	UserClasses.reserveSpotInClass({ user_id, class_id })
@@ -36,10 +37,10 @@ router.post('/', only, (req, res, next) => {
 		.catch(next);
 });
 
-//  Client can remove a reservation in a class FOR THEMSELVES, OR
+//  Client can remove a reservation in a class FOR THEMSELVES (not yet), OR
 // Instructor can remove any client from any class
 // GOOD, but NEEDS RESTRICTIONS
-router.delete('/:user_id/:class_id', only, (req, res, next) => {
+router.delete('/:user_id/:class_id', (req, res, next) => {
 	const { user_id, class_id } = req.params;
 	UserClasses.removeUserReservation(user_id, class_id)
 		.then(updatedClass => {
