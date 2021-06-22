@@ -5,7 +5,8 @@ const {
 	only,
 	checkIfAlreadyEnrolled,
 	checkIfClassHasSpace,
-	checkUserExistsById
+	checkUserExistsById,
+	checkIfReservationExists
 } = require('../middleware/index');
 
 // get all Class reservations, ordered by class id
@@ -51,30 +52,26 @@ router.post(
 
 //  Client can remove a reservation in a class FOR THEMSELVES (not yet, ?), OR
 // Instructor can remove any client from any class
-// GOOD, but NEEDS RESTRICTIONS (?)
-// 1. update class attendance
-// 2. checkIfReservationExists (?)
-router.delete('/:user_id/:class_id', checkUserExistsById, (req, res, next) => {
-	const { user_id, class_id } = req.params;
-	let classToUpdate;
-	UserClasses.removeUserReservation(user_id, class_id)
-		.then(theClass => {
-			classToUpdate = theClass;
-			console.log('So Far, So good on deleting Reservation');
-		})
-		.catch(next);
-
-	Classes.updateClass(class_id, {
-		current_class_size: (classToUpdate.current_class_size -= 1)
-	})
-		.then(updatedClass => {
-			console.log('Made it to Part Deux on deleting Reservation');
-			res.status(200).json({
-				message: 'Reserved Cancelled',
-				updatedClass: updatedClass
-			});
-		})
-		.catch(next);
-});
+router.delete(
+	'/:user_id/:class_id',
+	checkUserExistsById,
+	checkIfReservationExists,
+	(req, res, next) => {
+		const { user_id, class_id } = req.params;
+		UserClasses.removeUserReservation(user_id, class_id)
+			.then(theClass => {
+				Classes.updateClass(class_id, {
+					current_class_size: (theClass.current_class_size -= 1)
+				})
+					.then(updatedClass => {
+						res.status(200).json({
+							message: 'Reserved Cancelled',
+							updatedClass: updatedClass
+						});
+					})
+					.catch(next);
+			})
+			.catch(next);
+);
 
 module.exports = router;

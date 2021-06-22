@@ -48,7 +48,7 @@ function checkUsernameExists(req, res, next) {
 }
 
 function checkUserExistsById(req, res, next) {
-	const { user_id } = req.body;
+	const { user_id } = req.params;
 	Users.findUserById(user_id)
 		.then(user => {
 			if (!user) {
@@ -57,6 +57,7 @@ function checkUserExistsById(req, res, next) {
 					message: 'User not found'
 				});
 			} else {
+				console.log('got to the middleware');
 				next();
 			}
 		})
@@ -221,6 +222,23 @@ async function checkIfClassHasSpace(req, res, next) {
 	}
 }
 
+function checkIfReservationExists(req, res, next) {
+	const { user_id, class_id } = req.params;
+
+	UsersClasses.findReservation(user_id, class_id)
+		.then(reservation => {
+			if (!reservation) {
+				next({
+					status: 400,
+					message: 'Cannot find Reservation to be canceled'
+				});
+			} else {
+				next();
+			}
+		})
+		.catch(next);
+}
+
 module.exports = {
 	only,
 	restricted,
@@ -233,5 +251,6 @@ module.exports = {
 	validateAuthLevel,
 	validateClassInfo,
 	validateTypeId,
+	checkIfReservationExists,
 	logger
 };
