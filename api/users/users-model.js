@@ -27,11 +27,16 @@ async function removeUser(user_id) {
 	await db('users').where({ user_id }).del();
 	return userToBeDeleted;
 }
+async function getUserRole(username) {
+	const rows = await db('users as u').leftJoin('roles as r',"u.role_id","r.role_id").where("username",username)
+	return rows;
+}
 
 module.exports = {
 	findAllUsers,
 	findUserBy,
 	findUserById,
 	addUser,
-	removeUser
+	removeUser,
+	getUserRole
 };

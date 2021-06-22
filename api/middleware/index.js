@@ -17,6 +17,7 @@ const restricted = (req, res, next) => {
 			} else {
 				req.decodedJwt = decoded;
 				next();
+		
 			}
 		});
 	} else {
@@ -139,6 +140,7 @@ function checkIfSpaceInClass(req, res, next) {}
 // };
 
 module.exports = {
+	only,
 	restricted,
 	checkUsernameExists,
 	checkIfSpaceInClass,
@@ -146,6 +148,6 @@ module.exports = {
 	checkUsernameUnique,
 	validateCredentials,
 	validateAuthLevel,
-	only,
+	
 	logger
 };
