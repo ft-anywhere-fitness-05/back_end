@@ -131,13 +131,14 @@ function only(req, res, next) {
 
 function validateTypeId(req, res, next) {
 	let typeIdToBeChecked = req.body.type_id;
-	if (!typeIdToBeChecked || typeIdToBeChecked.trim() === '') {
+	// if (!typeIdToBeChecked || typeIdToBeChecked.trim() === '') {
+	if (!typeIdToBeChecked) {
 		next({
 			status: 400,
 			message: `Where's the type_id?`
 		});
 	} else {
-		typeIdToBeChecked = typeIdToBeChecked.trim();
+		// typeIdToBeChecked = typeIdToBeChecked.trim();
 		Types.findAllTypes()
 			.then(types => {
 				return types.some(type => type.type_id === typeIdToBeChecked);
@@ -177,9 +178,9 @@ function validateClassInfo(req, res, next) {
 		req.body = {
 			...req.body,
 			class_name: req.body.class_name.trim(),
-			location: req.body.location.trim(),
-			type_id: req.body.type_id.trim(),
-			description: req.body.description.trim()
+			location: req.body.location.trim()
+			// type_id: req.body.type_id,
+			// description: req.body.description ? req.body.description.trim() : ''
 		};
 		// req.body.class_name = class_name.trim();
 		// req.body.location = location.trim();

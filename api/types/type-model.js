@@ -9,8 +9,7 @@ const findClassesByTypeId = type_id => {
 	return db('types as t')
 		.join('classes as c', 't.type_id', 'c.type_id')
 		.select('*')
-		.where('c.type_id', type_id)
-		.first();
+		.where('c.type_id', type_id);
 };
 
 async function findClassesByType(type) {
