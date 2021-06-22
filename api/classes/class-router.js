@@ -44,13 +44,13 @@ router.post('/', restricted, only, (req, res, next) => {
 		.then(newClass => {
 			res.status(200).json({
 				message: 'Class created',
-				updatedClass: newClass[0]
+				createdClass: newClass[0]
 			});
 		})
 		.catch(next);
 });
 
-// instructor can change/update a class // GOOD but NEEDS RESTRICTIONS
+// instructor can change/update a class
 router.patch('/:class_id', restricted, only, (req, res, next) => {
 	Classes.updateClass(req.params.class_id, req.body)
 		.then(updatedClass => {
@@ -62,7 +62,7 @@ router.patch('/:class_id', restricted, only, (req, res, next) => {
 		.catch(next);
 });
 
-// instructor can delete a class // GOOD but NEEDS RESTRICTIONS
+// instructor can delete a class
 router.delete('/:class_id', restricted, only, (req, res, next) => {
 	Classes.removeClass(req.params.class_id)
 		.then(removedClass => {

@@ -311,7 +311,7 @@ Instructor can create a class
 ```JSON
 {
     "message": "Class created",
-    "updatedClass": {
+    "createdClass": {
         "class_id": 1,
         "class_name": "hot spin",
         "class_description": "Stationary bike class in a heated room. Consult you doctor.",

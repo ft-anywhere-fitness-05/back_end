@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { only } = require('../middleware');
 const Users = require('./users-model');
 
+// DONE
+
 // Instructors can get a list of all the users
 router.get('/', only, (req, res, next) => {
 	Users.findAllUsers()
