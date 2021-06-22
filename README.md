@@ -519,6 +519,8 @@ get a specific class type
 
 ##### [POST] /api/types
 
+**_RESTRICTED ENDPOINT_**
+
 Create a new class type
 
 > **_ Required information _**
