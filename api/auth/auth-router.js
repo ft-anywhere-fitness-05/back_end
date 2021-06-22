@@ -45,16 +45,12 @@ router.post(
 	'/login',
 	validateCredentials,
 	checkUsernameExists,
-	(req, res, next) => {
-		const { username, password, user_id } = req.body;
-
+	async (req, res, next) => {
+		const { username, password} = req.body;
+		
 		// check if password is correct
 		if (bcrypt.compareSync(password, req.validUser.password)) {
-			const token = tokenBuilder({
-				user_id,
-				username
-			});
-
+			const token = await tokenBuilder({username});
 			res.status(200).json({
 				message: `Welcome, ${username}!`,
 				token

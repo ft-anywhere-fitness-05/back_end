@@ -17,6 +17,7 @@ const restricted = (req, res, next) => {
 			} else {
 				req.decodedJwt = decoded;
 				next();
+		
 			}
 		});
 	} else {
@@ -25,18 +26,15 @@ const restricted = (req, res, next) => {
 };
 
 // checks role to see if user has access to desired location
-const only = auth_level => (req, res, next) => {
-	console.log(`desired role_name: ${auth_level}`);
-	console.log(`actual role_name: ${req.decodedJwt.auth_level}`);
-
-	if (auth_level === req.decodedJwt.auth_level) {
+const only=(req,res,next)=>{
+	 if (req.decodedJwt.role==='instructor') {
 		next();
-	} else {
-		next({
-			status: 403,
-			message: 'Get off my lawn. You are not an instructor'
-		});
-	}
+ } else {
+ 	next({
+ 		status: 403,
+	 		message: 'Get off my lawn. You are not an instructor'
+	 	});
+	 }
 };
 
 // don't need this??
@@ -138,6 +136,7 @@ async function validateAuthLevel(req, res, next) {
 function checkIfSpaceInClass(req, res, next) {}
 
 module.exports = {
+	only,
 	restricted,
 	checkUsernameExists,
 	checkIfSpaceInClass,
@@ -145,6 +144,6 @@ module.exports = {
 	checkUsernameUnique,
 	validateCredentials,
 	validateAuthLevel,
-	only,
+	
 	logger
 };

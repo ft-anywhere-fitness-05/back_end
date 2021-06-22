@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Types = require('./type-model');
-
+const {restricted,only}=require('../middleware/index')
 // get a list of all the Class Types
 router.get('/', (req, res, next) => {
 	Types.findAllTypes()
@@ -20,7 +20,7 @@ router.get('/:type_id', (req, res, next) => {
 });
 
 // instructor can create a class type// GOOD but NEEDS RESTRICTIONS
-router.post('/', (req, res, next) => {
+router.post('/',restricted, only,(req, res, next) => {
 	Types.addClassType(req.body)
 		.then(newType => {
 			res.status(200).json({
