@@ -28,10 +28,7 @@ router.get('/:user_id', (req, res, next) => {
 		.catch(next);
 });
 
-//  client can reserve a spot in a class // GOOD, but NEEDS RESTRICTIONS
-// 1. not already enrolled - checkIfAlreadyEnrolled
-// 2. check if user exists - checkIfUserExists
-// 3. update class attendance
+//  client can reserve a spot in a class
 router.post(
 	'/',
 	checkUserExistsById,
