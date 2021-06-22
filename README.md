@@ -543,7 +543,97 @@ Create a new class type
 
 ## User-Classes
 
-**_ For making and deleting class reservations _**
+**_ For checking, making, and deleting class reservations _**
+
+##### [GET] /api/user-classes
+
+**_RESTRICTED ENDPOINT_**
+
+Get all Class reservations, ordered by class id. Instructors Only
+
+<details>
+
+```JSON
+[
+    {
+        "user_class_id": 1,
+        "user_id": 5,
+        "class_id": 1
+    },
+    {
+        "user_class_id": 2,
+        "user_id": 2,
+        "class_id": 1
+    },
+    {
+        "user_class_id": 3,
+        "user_id": 3,
+        "class_id": 1
+    },
+    {
+        "user_class_id": 4,
+        "user_id": 4,
+        "class_id": 2
+    },
+    {
+        "user_class_id": 5,
+        "user_id": 5,
+        "class_id": 3
+    },
+    {
+        "user_class_id": 6,
+        "user_id": 1,
+        "class_id": 3
+    }
+]
+	
+```
+</details>
+
+##### [GET] /api/user-classes/:user_id
+
+**_RESTRICTED ENDPOINT_**
+
+Get all Class reservations of a certain user, ordered by date
+
+<details>
+
+```JSON
+[
+    {
+        "user_class_id": 1,
+        "user_id": 5,
+        "class_id": 1,
+        "class_name": "Hot Spin",
+        "class_description": "Stationary bike class in a heated room. Consult you doctor.",
+        "location": "7116 Oxford St. Pawtucket, RI 02860",
+        "date": "2021-07-05T04:00:00.000Z",
+        "start_time": "14:00:00",
+        "duration": "00:30:00",
+        "intensity": 5,
+        "max_class_size": 5,
+        "current_class_size": 3,
+        "type_id": 7
+    },
+    {
+        "user_class_id": 5,
+        "user_id": 5,
+        "class_id": 3,
+        "class_name": "Hip Hop Dance",
+        "class_description": "Dancing in the hip hop style in a heated room. Consult you doctor. Also, I think our air conditioner is broken",
+        "location": "797 Pin Oak St. Morrisville, PA 19067",
+        "date": "2021-07-05T04:00:00.000Z",
+        "start_time": "15:00:00",
+        "duration": "00:30:00",
+        "intensity": 3,
+        "max_class_size": 2,
+        "current_class_size": 2,
+        "type_id": 2
+    }
+]
+	
+```
+</details>
 
 ##### [POST] /api/user-classes
 
