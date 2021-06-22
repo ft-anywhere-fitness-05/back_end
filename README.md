@@ -550,12 +550,14 @@ Create a new class type
 Reserve a spot in a class
 
 > **_ Required information _**
-> {
 
+```JSON
+{
     user_id: "5",
     class_id: "2"
 
 }
+```
 
 <details>
 
