@@ -123,7 +123,7 @@ function only(req, res, next) {
 	} else {
 		next({
 			status: 403,
-			message: 'Get off my lawn. You are not an instructor'
+			message: 'Get off my lawn. You are Not an instructor'
 		});
 	}
 }
