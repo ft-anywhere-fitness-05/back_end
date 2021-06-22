@@ -3,7 +3,6 @@ const { JWT_SECRET, AUTH_CODE } = require('../secrets');
 const db = require('../../api/data/dbConfig');
 const Users = require('../users/users-model');
 const Types = require('../types/type-model');
-const { types } = require('pg');
 
 function logger(req, res, next) {
 	console.log(`[${new Date().toLocaleString()}] [${req.method}] ${req.path}`);
@@ -166,9 +165,12 @@ function validateClassInfo(req, res, next) {
 	}
 }
 
+function checkIfAlreadyEnrolled(req, res, next) {
+	next();
+}
+
 // checks authorization code to see if new user qualifies as instructor
-// also need to adjust class size based on enrollment ***********************************
-function checkIfSpaceInClass(req, res, next) {
+function checkIfClassHasSpace(req, res, next) {
 	next();
 }
 
@@ -176,7 +178,8 @@ module.exports = {
 	only,
 	restricted,
 	checkUsernameExists,
-	checkIfSpaceInClass,
+	checkIfAlreadyEnrolled,
+	checkIfClassHasSpace,
 	checkUsernameUnique,
 	validateCredentials,
 	validateAuthLevel,
