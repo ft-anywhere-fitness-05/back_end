@@ -84,7 +84,7 @@ async function validateCredentials(req, res, next) {
 		});
 	} else {
 		req.user = {
-			...req.body,
+			// ...req.body,
 			username: username.trim(),
 			password: password.trim()
 		};

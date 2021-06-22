@@ -63,6 +63,7 @@ router.post(
 );
 
 // instructor can change/update a class
+// prevent changing max class size below current class size
 router.patch('/:class_id', restricted, only, (req, res, next) => {
 	Classes.updateClass(req.params.class_id, req.body)
 		.then(updatedClass => {
