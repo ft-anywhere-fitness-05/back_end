@@ -4,7 +4,7 @@ const Users = require('./users-model');
 
 // DONE
 
-// Instructors can get a list of all the users
+// Instructors can get a list of all the users and their classes
 router.get('/', only, (req, res, next) => {
 	Users.findAllUsers()
 		.then(users => {

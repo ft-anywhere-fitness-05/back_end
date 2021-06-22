@@ -1,5 +1,13 @@
 const db = require('../../api/data/dbConfig');
 
+function getAllClassesWithAttendance() {
+	return db('user_classes').orderBy('class_id', 'asc');
+}
+
+function getClassesByUser(user_id) {
+	return db('user_classes').where('user_id', user_id).orderBy('date', 'asc');
+}
+
 function findReservation(user_id, class_id) {
 	return db('user_classes')
 		.where('user_id', user_id)
@@ -24,6 +32,8 @@ async function removeUserReservation(user_id, class_id) {
 }
 
 module.exports = {
+	getAllClassesWithAttendance,
+	getClassesByUser,
 	findReservation,
 	reserveSpotInClass,
 	removeUserReservation

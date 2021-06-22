@@ -1,5 +1,10 @@
 const router = require('express').Router();
-const { only, restricted } = require('../middleware');
+const {
+	only,
+	restricted,
+	validateClassInfo,
+	validateTypeId
+} = require('../middleware');
 const Classes = require('./class-model');
 
 // get a list of all the Classes by criteria
@@ -38,17 +43,24 @@ router.get('/:class_id', (req, res, next) => {
 		.catch(next);
 });
 
-// instructor can create a class // GOOD but NEEDS RESTRICTIONS
-router.post('/', restricted, only, (req, res, next) => {
-	Classes.addClass(req.body)
-		.then(newClass => {
-			res.status(200).json({
-				message: 'Class created',
-				createdClass: newClass[0]
-			});
-		})
-		.catch(next);
-});
+// instructor can create a class
+router.post(
+	'/',
+	restricted,
+	only,
+	validateTypeId,
+	validateClassInfo,
+	(req, res, next) => {
+		Classes.addClass(req.body)
+			.then(newClass => {
+				res.status(200).json({
+					message: 'Class created',
+					createdClass: newClass[0]
+				});
+			})
+			.catch(next);
+	}
+);
 
 // instructor can change/update a class
 router.patch('/:class_id', restricted, only, (req, res, next) => {

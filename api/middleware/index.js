@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, AUTH_CODE } = require('../secrets');
+const db = require('../../api/data/dbConfig');
 const Users = require('../users/users-model');
+const Types = require('../types/type-model');
+const { types } = require('pg');
 
 function logger(req, res, next) {
 	console.log(`[${new Date().toLocaleString()}] [${req.method}] ${req.path}`);
@@ -110,9 +113,64 @@ function only(req, res, next) {
 	}
 }
 
+function validateTypeId(req, res, next) {
+	let typeIdToBeChecked = req.body.type_id;
+	if (!typeIdToBeChecked || typeIdToBeChecked.trim() === '') {
+		next({
+			status: 400,
+			message: `Where's the type_id?`
+		});
+	} else {
+		typeIdToBeChecked = typeIdToBeChecked.trim();
+		Types.findAllTypes()
+			.then(types => {
+				return types.some(type => type.type_id === typeIdToBeChecked);
+			})
+			.then(matchedType => {
+				if (!matchedType) {
+					next({
+						status: 400,
+						message: `Type ID not found`
+					});
+				} else {
+					next();
+				}
+			})
+			.catch(next);
+	}
+}
+
+// check if the minimum requirements have been met to create a new class
+function validateClassInfo(req, res, next) {
+	const { class_name, location, date, start_time, type_id } = req.body;
+	if (
+		!class_name ||
+		class_name.trim() === '' ||
+		!location ||
+		location.trim() === '' ||
+		!date ||
+		!start_time ||
+		!type_id
+	) {
+		next({
+			status: 400,
+			message:
+				'Required minimums to create a class: class name, a location, a date, a start time, and a type (id)'
+		});
+	} else {
+		req.body.class_name = class_name.trim();
+		req.body.location = location.trim();
+		req.body.type_id = type_id.trim();
+		req.body.description = req.body.description.trim();
+		next();
+	}
+}
+
 // checks authorization code to see if new user qualifies as instructor
-//also need to adjust class size based on enrollment
-function checkIfSpaceInClass(req, res, next) {}
+// also need to adjust class size based on enrollment ***********************************
+function checkIfSpaceInClass(req, res, next) {
+	next();
+}
 
 module.exports = {
 	only,
@@ -122,6 +180,7 @@ module.exports = {
 	checkUsernameUnique,
 	validateCredentials,
 	validateAuthLevel,
-
+	validateClassInfo,
+	validateTypeId,
 	logger
 };

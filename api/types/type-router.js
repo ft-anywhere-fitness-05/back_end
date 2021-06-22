@@ -20,7 +20,7 @@ router.get('/:type_id', (req, res, next) => {
 		.catch(next);
 });
 
-// instructor can create a class type// GOOD but NEEDS RESTRICTIONS
+// instructor can create a class type
 router.post('/', restricted, only, (req, res, next) => {
 	Types.addClassType(req.body)
 		.then(newType => {
