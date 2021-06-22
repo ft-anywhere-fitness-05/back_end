@@ -84,6 +84,7 @@ async function validateCredentials(req, res, next) {
 		});
 	} else {
 		req.user = {
+			...req.body,
 			username: username.trim(),
 			password: password.trim()
 		};
@@ -173,10 +174,17 @@ function validateClassInfo(req, res, next) {
 				'Required minimums to create a class: class name, a location, a date, a start time, and a type (id)'
 		});
 	} else {
-		req.body.class_name = class_name.trim();
-		req.body.location = location.trim();
-		req.body.type_id = type_id.trim();
-		req.body.description = req.body.description.trim();
+		req.body = {
+			...req.body,
+			class_name: req.body.class_name.trim(),
+			location: req.body.location.trim(),
+			type_id: req.body.type_id.trim(),
+			description: req.body.description.trim()
+		};
+		// req.body.class_name = class_name.trim();
+		// req.body.location = location.trim();
+		// req.body.type_id = type_id.trim();
+		// req.body.description = req.body.description.trim();
 		next();
 	}
 }
