@@ -8,25 +8,17 @@ I've made a LOT of endpoints. Some will be useful, some are just for reference. 
 
 ### [GET] /api/classes/
 
-**_RESTRICTED ENDPOINT_**
-
 See the list of classes w/ data
 
 ### [GET] /api/classes/:class_id
-
-**_RESTRICTED ENDPOINT_**
 
 See a class's data at a :class_id
 
 ### [GET] /api/classes/type
 
-**_RESTRICTED ENDPOINT_**
-
 Can search for classes by type
 
 ### [GET] /api/classes/search
-
-**_RESTRICTED ENDPOINT_**
 
 Can search for classes by category
 
@@ -40,7 +32,7 @@ Instructor can create a class
 
 **_RESTRICTED ENDPOINT_**
 
-Instructor can edit a classes's information using the class_id
+Instructor can edit a class's information using the class_id
 
 ### [DELETE] /api/classes/:class_id
 
@@ -81,7 +73,7 @@ Auth Code to create a new instructor: 'steakOnAMonday'
 > password
 
 > **_ Optional information _**
-> AuthCode (to be recognized as an instructor: steakOnAMonday)
+> authCode (to be recognized as an instructor: steakOnAMonday)
 > if no code or wrong code entered, role_id defaults to '1', aka 'client'
 
 <details>
@@ -106,8 +98,8 @@ Logs in a user, receives a token for authorization
 
 > **_ Required information _**
 > ~in body
-    > username
-    > password
+> username
+> password
 
 <details>
 
@@ -123,8 +115,6 @@ Logs in a user, receives a token for authorization
 ## Classes
 
 ##### [GET] /api/classes
-
-**_RESTRICTED ENDPOINT_**
 
 See the full array of classes
 
@@ -178,12 +168,11 @@ See the full array of classes
 
 ##### [GET] /api/classes/search
 
-**_RESTRICTED ENDPOINT_**
-
 See a list of classes by the search criteria
 
 > **_ Required information _**
 > ~in body
+
      ```
      { searchCriteria: "intensity" }
      ```
@@ -235,17 +224,17 @@ See a list of classes by the search criteria
         "type_name": "cycling"
     }
 ]
-```	
+```
+
 </details>
 
 ##### [GET] /api/classes/type
-
-**_RESTRICTED ENDPOINT_**
 
 See a list of classes by the type
 
 > **_ Required information _**
 > ~in body
+
      ```
      { type: "yoga" }
      ```
@@ -269,14 +258,13 @@ See a list of classes by the type
         "type_name": "yoga"
     }
 ]
-```	
+```
+
 </details>
 
 ##### [GET] /api/classes/:class_id
 
-**_RESTRICTED ENDPOINT_**
-
-See the class's data at a :class_id
+See the class's data by a class_id
 
 <details>
 
@@ -307,15 +295,15 @@ Instructor can create a class
 > **_ Required information _**
 > class_name
 > location
-> date		- YYYY/MM/DD
-> start_time	- HH:MM:SS
+> date - YYYY/MM/DD
+> start_time - HH:MM:SS
 > type_id
 
 > **_ Optional information _**
-> intensity		- positive integer, defaults to 1
-> max_class_size	- positive integer, defaults to 5
-> duration		- HH:MM:SS, defaults to 00:30:00
-> current_class_size	- positive integer, defaults to 0
+> intensity - positive integer, defaults to 1
+> max_class_size - positive integer, defaults to 5
+> duration - HH:MM:SS, defaults to 00:30:00
+> current_class_size - positive integer, defaults to 0
 > class_description
 
 <details>
@@ -349,8 +337,8 @@ Instructor can edit a class's information using the class_id
 
 > **_ Required information _**
 > Only information provided in the body will update in selected class
-> { intensity: "6" }	- Works
-> { intensit: "6" }	- Does not work Works
+> { intensity: "6" } - Works
+> { intensit: "6" } - Does not work
 
 <details>
 
@@ -463,8 +451,6 @@ See a specific user's information
 
 ##### [GET] /api/types
 
-**_RESTRICTED ENDPOINT_**
-
 See the full array of class types
 
 <details>
@@ -518,8 +504,6 @@ See the full array of class types
 
 ##### [GET] /api/types/:type_id
 
-**_RESTRICTED ENDPOINT_**
-
 get a specific class type
 
 <details>
@@ -567,8 +551,10 @@ Reserve a spot in a class
 
 > **_ Required information _**
 > {
+
     user_id: "5",
     class_id: "2"
+
 }
 
 <details>

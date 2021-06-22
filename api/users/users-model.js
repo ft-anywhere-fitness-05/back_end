@@ -5,11 +5,17 @@ const findAllUsers = () => {
 };
 
 const findUserBy = filter => {
-	return db('users').where(filter).first();
+	return db('users as u')
+		.join('roles as r', 'u.role_id', 'r.role_id')
+		.where(filter)
+		.first();
 };
 
 const findUserById = user_id => {
-	return db('users').select('user_id', 'username').where({ user_id }).first();
+	return db('users')
+		.select('user_id', 'username', 'role_id')
+		.where({ user_id })
+		.first();
 };
 
 async function addUser(user) {

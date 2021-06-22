@@ -1,9 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const { logger } = require('./middleware/index');
+const { logger, restricted } = require('./middleware/index');
 const server = express();
-const { restricted } = require('./middleware/index');
 
 // routers
 const authRouter = require('./auth/auth-router');
@@ -21,10 +20,9 @@ server.use(logger);
 
 server.use('/api/auth/', authRouter);
 server.use('/api/classes/', classRouter);
-// server.use('/api/users/', restricted, userRouter); // to be used instead of below when all is working
-server.use('/api/users/', userRouter);
+server.use('/api/users/', restricted, userRouter);
 server.use('/api/types/', typeRouter);
-server.use('/api/user-classes/', userClassRouter);
+server.use('/api/user-classes/', restricted, userClassRouter);
 
 server.use('*', (req, res) => {
 	res.send(
