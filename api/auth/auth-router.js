@@ -58,6 +58,8 @@ router.post(
 			});
 
 			res.status(200).json({
+				user_id,
+				role_name,
 				message: `Welcome, ${username}!`,
 				token
 			});
