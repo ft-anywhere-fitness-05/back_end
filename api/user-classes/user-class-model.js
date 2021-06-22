@@ -5,7 +5,10 @@ function getAllClassesWithAttendance() {
 }
 
 function getClassesByUser(user_id) {
-	return db('user_classes').where('user_id', user_id).orderBy('date', 'asc');
+	return db('user_classes as uc')
+		.join('classes as c', 'c.class_id', 'uc.class_id')
+		.where('user_id', user_id)
+		.orderBy('date', 'asc');
 }
 
 function findReservation(user_id, class_id) {

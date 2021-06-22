@@ -28,7 +28,7 @@ exports.seed = function (knex) {
 			type_name: 'conditioning'
 		},
 		{
-			type_name: 'kickboxing'
+			type_name: 'MMA'
 		}
 	]);
 };
