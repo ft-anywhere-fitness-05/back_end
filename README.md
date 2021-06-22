@@ -452,7 +452,8 @@ See a specific user's information
 ```JSON
  {
         "user_id": 5,
-        "username": "Biff"
+        "username": "Biff",
+	"role_id": "2"
  }
 ```
 
