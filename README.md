@@ -69,11 +69,11 @@ Create a new user or instructor.
 Auth Code to create a new instructor: 'steakOnAMonday'
 
 > **_ Required information _**
-> username
+> username, 
 > password
 
 > **_ Optional information _**
-> authCode (to be recognized as an instructor: steakOnAMonday)
+> authCode (to be recognized as an instructor: steakOnAMonday), 
 > if no code or wrong code entered, role_id defaults to '1', aka 'client'
 
 <details>
@@ -97,8 +97,8 @@ Auth Code to create a new instructor: 'steakOnAMonday'
 Logs in a user, receives a token for authorization
 
 > **_ Required information _**
-> ~in body
-> username
+> ~ in body ~ 
+> username, 
 > password
 
 <details>
@@ -171,7 +171,7 @@ See the full array of classes
 See a list of classes by the search criteria
 
 > **_ Required information _**
-> ~in body
+> ~ in body ~
 
      ```
      { searchCriteria: "intensity" }
@@ -233,7 +233,7 @@ See a list of classes by the search criteria
 See a list of classes by the type
 
 > **_ Required information _**
-> ~in body
+> ~ in body ~ 
 
      ```
      { type: "yoga" }
@@ -293,17 +293,17 @@ See the class's data by a class_id
 Instructor can create a class
 
 > **_ Required information _**
-> class_name
-> location
-> date - YYYY/MM/DD
-> start_time - HH:MM:SS
+> class_name, 
+> location, 
+> date - YYYY/MM/DD, 
+> start_time - HH:MM:SS, 
 > type_id
 
 > **_ Optional information _**
-> intensity - positive integer, defaults to 1
-> max_class_size - positive integer, defaults to 5
-> duration - HH:MM:SS, defaults to 00:30:00
-> current_class_size - positive integer, defaults to 0
+> intensity - positive integer, defaults to 1, 
+> max_class_size - positive integer, defaults to 5, 
+> duration - HH:MM:SS, defaults to 00:30:00, 
+> current_class_size - positive integer, defaults to 0, 
 > class_description
 
 <details>
@@ -336,8 +336,8 @@ Instructor can create a class
 Instructor can edit a class's information using the class_id
 
 > **_ Required information _**
-> Only information provided in the body will update in selected class
-> { intensity: "6" } - Works
+> Only information provided in the body will update in selected class, 
+> { intensity: "6" } - Works, 
 > { intensit: "6" } - Does not work
 
 <details>
@@ -519,10 +519,12 @@ get a specific class type
 
 ##### [POST] /api/types
 
+**_RESTRICTED ENDPOINT_**
+
 Create a new class type
 
 > **_ Required information _**
-> unique type_name
+> unique type_name, 
 > must be an instructor
 
 <details>
@@ -550,12 +552,13 @@ Create a new class type
 Reserve a spot in a class
 
 > **_ Required information _**
-> {
 
+```
+{
     user_id: "5",
     class_id: "2"
-
 }
+```
 
 <details>
 
