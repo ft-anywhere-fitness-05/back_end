@@ -14,7 +14,7 @@ router.post('/',restricted, (req, res, next) => {
 		.catch(next);
 });
 
-//  Client can reserve a spot in a class FOR THEMSELVES, OR
+//  Client can remove a reservation in a class FOR THEMSELVES, OR
 // Instructor can remove any client from any class
 // GOOD, but NEEDS RESTRICTIONS
 router.delete('/:user_id/:class_id',restricted, only, (req, res, next) => {

@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { only, restricted } = require('../middleware');
 const Classes = require('./class-model');
 
 // get a list of all the Classes by criteria
@@ -38,7 +39,7 @@ router.get('/:class_id', (req, res, next) => {
 });
 
 // instructor can create a class // GOOD but NEEDS RESTRICTIONS
-router.post('/', (req, res, next) => {
+router.post('/', restricted, only, (req, res, next) => {
 	Classes.addClass(req.body)
 		.then(newClass => {
 			res.status(200).json({
@@ -50,7 +51,7 @@ router.post('/', (req, res, next) => {
 });
 
 // instructor can change/update a class // GOOD but NEEDS RESTRICTIONS
-router.patch('/:class_id', (req, res, next) => {
+router.patch('/:class_id', restricted, only, (req, res, next) => {
 	Classes.updateClass(req.params.class_id, req.body)
 		.then(updatedClass => {
 			res.status(201).json({
@@ -62,7 +63,7 @@ router.patch('/:class_id', (req, res, next) => {
 });
 
 // instructor can delete a class // GOOD but NEEDS RESTRICTIONS
-router.delete('/:class_id', (req, res, next) => {
+router.delete('/:class_id', restricted, only, (req, res, next) => {
 	Classes.removeClass(req.params.class_id)
 		.then(removedClass => {
 			res.status(200).json({

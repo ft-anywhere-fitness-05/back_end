@@ -20,7 +20,7 @@ router.post(
 		let user = req.user;
 
 		// encrypt the password
-		const rounds = process.env.BCRYPT_ROUNDS || 6;
+		const rounds = process.env.BCRYPT_ROUNDS || 8;
 		const hash = bcrypt.hashSync(user.password, rounds);
 		user.password = hash;
 
@@ -45,12 +45,18 @@ router.post(
 	'/login',
 	validateCredentials,
 	checkUsernameExists,
-	async (req, res, next) => {
-		const { username, password} = req.body;
-		
+	(req, res, next) => {
+		const { username, password } = req.user;
+		const { user_id, role_name } = req.validUser;
+
 		// check if password is correct
 		if (bcrypt.compareSync(password, req.validUser.password)) {
-			const token = await tokenBuilder({username});
+			const token = tokenBuilder({
+				user_id,
+				username,
+				role_name
+			});
+
 			res.status(200).json({
 				message: `Welcome, ${username}!`,
 				token
