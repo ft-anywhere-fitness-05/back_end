@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const UserClasses = require('./user-class-model');
+const Classes = require('../classes/class-model');
 const {
 	only,
 	checkIfAlreadyEnrolled,
-	checkIfClassHasSpace
+	checkIfClassHasSpace,
+	checkUserExistsById
 } = require('../middleware/index');
 
 // get all Class reservations, ordered by class id
@@ -27,12 +29,13 @@ router.get('/:user_id', (req, res, next) => {
 
 //  client can reserve a spot in a class // GOOD, but NEEDS RESTRICTIONS
 // 1. not already enrolled - checkIfAlreadyEnrolled
-// 2. class not yet full - checkIfClassHasSpace
+// 2. check if user exists - checkIfUserExists
 // 3. update class attendance
 router.post(
 	'/',
-	checkIfAlreadyEnrolled,
+	checkUserExistsById,
 	checkIfClassHasSpace,
+	checkIfAlreadyEnrolled,
 	(req, res, next) => {
 		const { user_id, class_id } = req.body;
 		UserClasses.reserveSpotInClass({ user_id, class_id })
@@ -49,10 +52,23 @@ router.post(
 //  Client can remove a reservation in a class FOR THEMSELVES (not yet, ?), OR
 // Instructor can remove any client from any class
 // GOOD, but NEEDS RESTRICTIONS (?)
-router.delete('/:user_id/:class_id', (req, res, next) => {
+// 1. update class attendance
+// 2. checkIfReservationExists (?)
+router.delete('/:user_id/:class_id', checkUserExistsById, (req, res, next) => {
 	const { user_id, class_id } = req.params;
+	let classToUpdate;
 	UserClasses.removeUserReservation(user_id, class_id)
+		.then(theClass => {
+			classToUpdate = theClass;
+			console.log('So Far, So good on deleting Reservation');
+		})
+		.catch(next);
+
+	Classes.updateClass(class_id, {
+		current_class_size: (classToUpdate.current_class_size -= 1)
+	})
 		.then(updatedClass => {
+			console.log('Made it to Part Deux on deleting Reservation');
 			res.status(200).json({
 				message: 'Reserved Cancelled',
 				updatedClass: updatedClass

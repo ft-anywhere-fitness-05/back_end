@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET, AUTH_CODE } = require('../secrets');
 const db = require('../../api/data/dbConfig');
 const Users = require('../users/users-model');
+const UsersClasses = require('../user-classes/user-class-model');
 const Types = require('../types/type-model');
 
 function logger(req, res, next) {
@@ -41,6 +42,22 @@ function checkUsernameExists(req, res, next) {
 					status: 401,
 					message: 'invalid credentials/username does not exist'
 				});
+			}
+		})
+		.catch(next);
+}
+
+function checkUserExistsById(req, res, next) {
+	const { user_id } = req.body;
+	Users.findUserById(user_id)
+		.then(user => {
+			if (!user) {
+				next({
+					status: 400,
+					message: 'User not found'
+				});
+			} else {
+				next();
 			}
 		})
 		.catch(next);
@@ -166,18 +183,49 @@ function validateClassInfo(req, res, next) {
 }
 
 function checkIfAlreadyEnrolled(req, res, next) {
-	next();
+	const { user_id, class_id } = req.body;
+
+	UsersClasses.findReservation(user_id, class_id)
+		.then(reservation => {
+			if (reservation) {
+				next({
+					status: 400,
+					message: 'Spot already reserved for this client'
+				});
+			} else {
+				next();
+			}
+		})
+		.catch(next);
 }
 
 // checks authorization code to see if new user qualifies as instructor
-function checkIfClassHasSpace(req, res, next) {
-	next();
+async function checkIfClassHasSpace(req, res, next) {
+	const theClass = await db('classes')
+		.where('class_id', req.body.class_id)
+		.first();
+	if (!theClass) {
+		next({
+			status: 400,
+			message: 'Class does not exist'
+		});
+	} else {
+		if (theClass['max_class_size'] <= theClass['current_class_size']) {
+			next({
+				status: 400,
+				message: 'Sorry, the class is full'
+			});
+		} else {
+			next();
+		}
+	}
 }
 
 module.exports = {
 	only,
 	restricted,
 	checkUsernameExists,
+	checkUserExistsById,
 	checkIfAlreadyEnrolled,
 	checkIfClassHasSpace,
 	checkUsernameUnique,

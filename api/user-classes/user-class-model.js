@@ -14,7 +14,8 @@ function getClassesByUser(user_id) {
 function findReservation(user_id, class_id) {
 	return db('user_classes')
 		.where('user_id', user_id)
-		.where('class_id', class_id);
+		.where('class_id', class_id)
+		.first();
 }
 
 async function reserveSpotInClass({ user_id, class_id }) {
@@ -31,7 +32,7 @@ async function removeUserReservation(user_id, class_id) {
 		.where('uc.user_id', user_id)
 		.where('uc.class_id', class_id)
 		.del();
-	return db('classes').where('classes.class_id', class_id).first();
+	return db('classes').where('class_id', class_id).first();
 }
 
 module.exports = {
