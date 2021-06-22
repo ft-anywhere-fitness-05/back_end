@@ -522,7 +522,7 @@ get a specific class type
 Create a new class type
 
 > **_ Required information _**
-> unique type_name
+> unique type_name, 
 > must be an instructor
 
 <details>
