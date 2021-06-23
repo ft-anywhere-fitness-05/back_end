@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET, AUTH_CODE } = require('../secrets');
 const db = require('../../api/data/dbConfig');
 const Users = require('../users/users-model');
+const Classes = require('../classes/class-model');
 const UsersClasses = require('../user-classes/user-class-model');
 const Types = require('../types/type-model');
 
@@ -179,14 +180,33 @@ function validateClassInfo(req, res, next) {
 			...req.body,
 			class_name: req.body.class_name.trim(),
 			location: req.body.location.trim()
-			// type_id: req.body.type_id,
-			// description: req.body.description ? req.body.description.trim() : ''
 		};
-		// req.body.class_name = class_name.trim();
-		// req.body.location = location.trim();
-		// req.body.type_id = type_id.trim();
-		// req.body.description = req.body.description.trim();
-		next();
+		const { class_name } = req.body;
+		Classes.findClassBy({ class_name })
+			.then(user => {
+				if (user) {
+					next({
+						status: 400,
+						message: 'Class name must be unique.'
+					});
+				} else {
+					req.validUser = user;
+					next();
+				}
+			})
+			.catch(next);
+		// Classes.findClassBy(class_name)
+		// 	.then(theClasses => {
+		// 		if (theClasses.length > 0) {
+		// 			next({
+		// 				status: 400,
+		// 				message: 'Class name must be unique.'
+		// 			});
+		// 		} else {
+		// 			next();
+		// 		}
+		// 	})
+		// 	.catch(next);
 	}
 }
 
