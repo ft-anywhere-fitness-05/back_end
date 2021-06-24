@@ -12,6 +12,7 @@ exports.up = function (knex) {
 			users.increments('user_id');
 			users.string('username', 128).unique().notNullable();
 			users.string('password').notNullable();
+			users.boolean('on_boarding').defaultTo(false)
 			users
 				.integer('role_id')
 				.unsigned()

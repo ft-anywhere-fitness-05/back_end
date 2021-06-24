@@ -14,7 +14,7 @@ See the list of classes w/ data
 
 See a class's data at a :class_id
 
-### [GET] /api/classes/type
+### [GET] /api/type
 
 Can search for classes by type
 
@@ -105,10 +105,11 @@ Logs in a user, receives a token for authorization
 
 ```JSON
 {
-    "message": "Welcome, Michael!",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pY2hhZWwiLCJpYXQiOjE2MjQyNjY1MTcsImV4cCI6MTYyNDM1MjkxN30.zPy6jUxfLDj8YRZLTMp_scFC4FzY8tYcPh3IrlUJjF4"
+    "user_id": 4,
+    "role_name": "instructor",
+    "message": "Welcome, Daniel!",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo0LCJ1c2VybmFtZSI6IkRhbmllbCIsInJvbGVfbmFtZSI6Imluc3RydWN0b3IiLCJpYXQiOjE2MjQ1NTA1MTIsImV4cCI6MTYyNDYzNjkxMn0.MpT2wondgaS0y2Oxx7-G7GaWqvmOppKVj0GvUkNaUbc"
 }
-```
 
 </details>
 
@@ -428,6 +429,24 @@ See the full array of users
 ```
 
 </details>
+##### [post] /api/users/
+
+**_RESTRICTED ENDPOINT_**
+
+Changes on_boarding status
+
+<details>
+
+```JSON
+{
+    "user_id": 4,
+    "username": "Daniel",
+    "on_boarding": true
+}
+```
+
+</details>
+
 
 ##### [GET] /api/users/:user_id
 
@@ -701,4 +720,3 @@ Remove a User's Reservation
 ```
 
 </details>
-//
