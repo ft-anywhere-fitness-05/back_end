@@ -31,12 +31,28 @@ async function getUserRole(username) {
 	const rows = await db('users as u').leftJoin('roles as r',"u.role_id","r.role_id").where("username",username)
 	return rows;
 }
-
+async function onBoarding(user_id){
+	const rows = db("users").where("user_id",user_id).select("user_id","username","on_boarding")
+	return rows
+}
+async function setOnboarding(user,user_id){
+	const{ob} = user
+	const [userx] = await onBoarding(user_id)///finding full details about user
+	const returnObj={
+		...userx,
+		on_boarding:user.on_boarding
+		
+	}
+	await db("users").update(returnObj).where("user_id",user_id)
+	return returnObj
+}
 module.exports = {
 	findAllUsers,
 	findUserBy,
 	findUserById,
 	addUser,
 	removeUser,
-	getUserRole
+	getUserRole,
+	onBoarding,
+	setOnboarding
 };

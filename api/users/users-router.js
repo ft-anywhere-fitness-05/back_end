@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { only } = require('../middleware');
+const { only, restricted } = require('../middleware');
 const Users = require('./users-model');
 
 // DONE
@@ -20,6 +20,14 @@ router.get('/:user_id', only, (req, res, next) => {
 			res.status(200).json(user);
 		})
 		.catch(next);
+});
+router.post('/', restricted, (req, res, next) => {
+	const user_id = req.decodedJwt.subject
+	Users.setOnboarding(req.body,user_id)
+	.then(user=>{
+		res.json(user)
+	})
+	.catch(next)
 });
 
 module.exports = router;
