@@ -556,9 +556,20 @@ get a specific class type
 
 Create a new class type
 
-> **_ Required information _**
-> unique type_name,
 > must be an instructor
+
+<details>
+<summary>What You Send</summary>
+
+```JSON
+
+{
+	"type": "new unique type name"
+}
+
+```
+
+</details>
 
 <details>
 <summary>What You Should Receive</summary>
@@ -679,14 +690,18 @@ Get all Class reservations of a certain user, ordered by date
 
 Reserve a spot in a class
 
-> **_ Required information _**
+<details>
+<summary>What You Send</summary>
+
+```JSON
+{
+	"user_id": "5",
+	"class_id": "2"
+}
 
 ```
-{
-    user_id: "5",
-    class_id: "2"
-}
-```
+
+</details>
 
 <details>
 <summary>What You Should Receive</summary>
