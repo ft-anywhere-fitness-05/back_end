@@ -6,36 +6,6 @@
 
 I've made a LOT of endpoints. Some will be useful, some are just for reference. JSON examples listed underneath this list.
 
-### [GET] /api/classes/
-
-See the list of classes w/ data
-
-### [GET] /api/classes/:class_id
-
-See a class's data at a :class_id
-
-### [GET] /api/classes/search
-
-Can search for classes by category
-
-### [POST] /api/classes/
-
-**_RESTRICTED ENDPOINT_**
-
-Instructor can create a class
-
-### [PATCH] /api/classes/:class_id
-
-**_RESTRICTED ENDPOINT_**
-
-Instructor can edit a class's information using the class_id
-
-### [DELETE] /api/classes/:class_id
-
-**_RESTRICTED ENDPOINT_**
-
-Instructor can remove a class using the class_id
-
 <details>
 <summary>What You Send</summary>
 
