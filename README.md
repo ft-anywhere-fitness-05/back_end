@@ -76,6 +76,7 @@ Auth Code to create a new instructor: 'steakOnAMonday'
 > authCode (to be recognized as an instructor: steakOnAMonday), 
 > if no code or wrong code entered, role_id defaults to '1', aka 'client'
 
+<summary>What You Should Receive</summary>
 <details>
 
 ```JSON
