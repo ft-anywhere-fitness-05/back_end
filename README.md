@@ -4,7 +4,7 @@
 
 ### What To Know About This API
 
-I've made a LOT of endpoints. Some will be useful, some are just for reference. JSON examples listed underneath this list. Don't care about reference? These are the ones you want:
+I've made a LOT of endpoints. Some will be useful, some are just for reference. JSON examples listed underneath this list.
 
 ### [GET] /api/classes/
 
@@ -13,10 +13,6 @@ See the list of classes w/ data
 ### [GET] /api/classes/:class_id
 
 See a class's data at a :class_id
-
-### [GET] /api/type
-
-Can search for classes by type
 
 ### [GET] /api/classes/search
 
@@ -40,28 +36,7 @@ Instructor can edit a class's information using the class_id
 
 Instructor can remove a class using the class_id
 
-### [GET] /api/users/
-
-**_RESTRICTED ENDPOINT_**
-
-Instructor can see a list of users w/ information
-
-### [GET] /api/users/:user_id
-
-**_RESTRICTED ENDPOINT_**
-
-Instructor can see a specific user's information
-
-### [POST] /api/auth/register
-
-Create a new user or instructor.
-Auth Code to create a new instructor: 'steakOnAMonday'
-
-### [POST] /api/auth/login
-
-Logs in a user, receives a token for authorization
-
-## Register / Login
+## ----- REGISTER / LOGIN -----
 
 ### [POST] /api/auth/register
 
@@ -115,7 +90,7 @@ Logs in a user, receives a token for authorization
 
 </details>
 
-## Classes
+## ----- CLASSES -----
 
 ##### [GET] /api/classes
 
@@ -395,7 +370,7 @@ Instructor can remove a class using the class_id
 
 </details>
 
-## Users
+## ----- USERS -----
 
 ##### [GET] /api/users
 
@@ -468,7 +443,7 @@ See a specific user's information
 
 </details>
 
-## Types
+## ----- TYPES -----
 
 ##### [GET] /api/types
 
@@ -562,7 +537,7 @@ Create a new class type
 
 </details>
 
-## User-Classes
+## ----- USER-CLASSES -----
 
 **_ For checking, making, and deleting class reservations _**
 
