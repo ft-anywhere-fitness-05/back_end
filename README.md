@@ -440,7 +440,8 @@ See the full array of users
 ```
 
 </details>
-### [post] /api/users/
+
+### [POST] /api/users/
 
 **_RESTRICTED ENDPOINT_**
 
