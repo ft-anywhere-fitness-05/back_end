@@ -48,7 +48,7 @@ Instructor can remove a class using the class_id
 </details>
 
 
-## ----- REGISTER / LOGIN -----
+## ---------- REGISTER / LOGIN ----------
 
 ### [POST] /api/auth/register
 
@@ -117,7 +117,7 @@ Logs in a user, receives a token for authorization
 
 </details>
 
-## ----- CLASSES -----
+## ---------- CLASSES ----------
 
 ##### [GET] /api/classes
 
@@ -397,7 +397,7 @@ Instructor can remove a class using the class_id
 
 </details>
 
-## ----- USERS -----
+## ---------- USERS ----------
 
 ##### [GET] /api/users
 
@@ -470,7 +470,7 @@ See a specific user's information
 
 </details>
 
-## ----- TYPES -----
+## ---------- TYPES ----------
 
 ##### [GET] /api/types
 
@@ -564,7 +564,7 @@ Create a new class type
 
 </details>
 
-## ----- USER-CLASSES -----
+## ---------- USER-CLASSES ----------
 
 **_ For checking, making, and deleting class reservations _**
 
