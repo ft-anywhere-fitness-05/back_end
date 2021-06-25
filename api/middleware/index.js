@@ -158,6 +158,7 @@ function validateTypeId(req, res, next) {
 	}
 }
 
+// TEST THIS
 // check if the minimum requirements have been met to create a new class
 function validateClassInfo(req, res, next) {
 	const { class_name, location, date, start_time, type_id } = req.body;
@@ -195,18 +196,6 @@ function validateClassInfo(req, res, next) {
 				}
 			})
 			.catch(next);
-		// Classes.findClassBy(class_name)
-		// 	.then(theClasses => {
-		// 		if (theClasses.length > 0) {
-		// 			next({
-		// 				status: 400,
-		// 				message: 'Class name must be unique.'
-		// 			});
-		// 		} else {
-		// 			next();
-		// 		}
-		// 	})
-		// 	.catch(next);
 	}
 }
 
