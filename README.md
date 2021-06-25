@@ -36,12 +36,39 @@ Instructor can edit a class's information using the class_id
 
 Instructor can remove a class using the class_id
 
+
+<details>
+<summary>What You Send</summary>
+
+```JSON
+
+	
+```
+
+</details>
+
+
 ## ----- REGISTER / LOGIN -----
 
 ### [POST] /api/auth/register
 
 Create a new user or instructor.
 Auth Code to create a new instructor: 'steakOnAMonday'
+Otherwise, defaults to "client"
+
+<details>
+<summary>What You Send</summary>
+
+```JSON
+{
+	"username": "Bob"
+	"password": "itsapassword"
+	"authCode": "steakOnAMonday"
+}
+	
+```
+
+</details>
 
 > **_ Required information _**
 > username, 
