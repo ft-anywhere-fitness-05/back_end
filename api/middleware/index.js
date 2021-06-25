@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, AUTH_CODE } = require('../secrets');
-const db = require('../../api/data/dbConfig');
+const db = require('../data/dbConfig');
 const Users = require('../users/users-model');
 const Classes = require('../classes/class-model');
 const UsersClasses = require('../user-classes/user-class-model');
@@ -181,6 +181,8 @@ function validateClassInfo(req, res, next) {
 			...req.body,
 			class_name: req.body.class_name.trim(),
 			location: req.body.location.trim()
+			// type_id: req.body.type_id,
+			// description: req.body.description ? req.body.description.trim() : ''
 		};
 		const { class_name } = req.body;
 		Classes.findClassBy({ class_name })
