@@ -70,14 +70,6 @@ Otherwise, defaults to "client"
 
 </details>
 
-> **_ Required information _**
-> username, 
-> password
-
-> **_ Optional information _**
-> authCode (to be recognized as an instructor: steakOnAMonday), 
-> if no code or wrong code entered, role_id defaults to '1', aka 'client'
-
 
 <details>
 <summary>What You Should Receive</summary>
@@ -96,16 +88,26 @@ Otherwise, defaults to "client"
 
 </details>
 
-##### [POST] /api/users/login
+### [POST] /api/users/login
 
 Logs in a user, receives a token for authorization
 
-> **_ Required information _**
-> ~ in body ~ 
-> username, 
-> password
+<details>
+<summary>What You Send</summary>
+
+```JSON
+{
+	"username": "Bob"
+	"password": "itsapassword"
+}
+	
+```
+
+</details>
+
 
 <details>
+<summary>What You Should Receive</summary>
 
 ```JSON
 	
@@ -122,7 +124,7 @@ Logs in a user, receives a token for authorization
 
 ## ---------- CLASSES ----------
 
-##### [GET] /api/classes
+### [GET] /api/classes
 
 See the full array of classes
 
