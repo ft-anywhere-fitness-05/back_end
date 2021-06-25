@@ -108,14 +108,17 @@ Logs in a user, receives a token for authorization
 <details>
 
 ```JSON
+	
 {
     "user_id": 4,
     "role_name": "instructor",
     "message": "Welcome, Daniel!",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo0LCJ1c2VybmFtZSI6IkRhbmllbCIsInJvbGVfbmFtZSI6Imluc3RydWN0b3IiLCJpYXQiOjE2MjQ1NTA1MTIsImV4cCI6MTYyNDYzNjkxMn0.MpT2wondgaS0y2Oxx7-G7GaWqvmOppKVj0GvUkNaUbc"
 }
-
+```
+	
 </details>
+
 
 ## ---------- CLASSES ----------
 
