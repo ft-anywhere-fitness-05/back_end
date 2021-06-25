@@ -94,6 +94,7 @@ Logs in a user, receives a token for authorization
 See the full array of classes
 
 <details>
+<summary>What You Should Receive</summary>
 
 ```JSON
 [
@@ -145,14 +146,20 @@ See the full array of classes
 
 See a list of classes by the search criteria
 
-> **_ Required information _**
-> ~ in body ~
+<details>
+<summary>What You Send</summary>
 
-     ```
-     { searchCriteria: "intensity" }
-     ```
+```JSON
+{
+	"searchCriteria": "intensity"
+}
+
+```
+
+</details>
 
 <details>
+<summary>What You Should Receive</summary>
 
 ```JSON
 [
@@ -207,14 +214,20 @@ See a list of classes by the search criteria
 
 See a list of classes by the type
 
-> **_ Required information _**
-> ~ in body ~
+<details>
+<summary>What You Send</summary>
 
-     ```
-     { type: "yoga" }
-     ```
+```JSON
+{
+	"type": "yoga"
+}
+
+```
+
+</details>
 
 <details>
+<summary>What You Should Receive</summary>
 
 ```JSON
 [
@@ -242,7 +255,8 @@ See a list of classes by the type
 See the class's data by a class_id
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 {
     "class_id": 1,
@@ -267,22 +281,33 @@ See the class's data by a class_id
 
 Instructor can create a class
 
-> **_ Required information _**
-> class_name,
-> location,
-> date - YYYY/MM/DD,
-> start_time - HH:MM:SS,
-> type_id
+<details>
+<summary>What You Send</summary>
 
-> **_ Optional information _**
-> intensity - positive integer, defaults to 1,
-> max_class_size - positive integer, defaults to 5,
-> duration - HH:MM:SS, defaults to 00:30:00,
-> current_class_size - positive integer, defaults to 0,
-> class_description
+```JSON
+{
+	// required
+	"class_name": "name",
+	"location": "address",
+	"date": "YYYY/MM/DD",
+	"start_time": "HH:MM:SS",
+	"type_id": "4"
+
+	// optional
+	"intensity": "positive integer, defaults to 1",
+	"max_class_size": "positive integer, defaults to 5",
+	"duration": "HH:MM:SS, defaults to 00:30:00",
+	"current_class_size": "positive integer, defaults to 0",
+	"class_description": ""
+}
+
+```
+
+</details>
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 {
     "message": "Class created",
@@ -310,12 +335,22 @@ Instructor can create a class
 
 Instructor can edit a class's information using the class_id
 
-> **_ Required information _**
-> Only information provided in the body will update in selected class,
-> { intensity: "6" } - Works,
-> { intensit: "6" } - Does not work
+> Only information provided in the body will update in selected class
 
 <details>
+<summary>What You Send</summary>
+
+```JSON
+{
+	"intensity": "6" // one example
+}
+
+```
+
+</details>
+
+<details>
+<summary>What You Should Receive</summary>
 
 ```JSON
 {
@@ -345,6 +380,7 @@ Instructor can edit a class's information using the class_id
 Instructor can remove a class using the class_id
 
 <details>
+<summary>What You Should Receive</summary>
 
 ```JSON
 {
@@ -376,7 +412,8 @@ Instructor can remove a class using the class_id
 See the full array of users
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 [
     {
@@ -410,7 +447,8 @@ See the full array of users
 Changes on_boarding status
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 {
     "user_id": 4,
@@ -428,7 +466,8 @@ Changes on_boarding status
 See a specific user's information
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
  {
         "user_id": 5,
@@ -446,7 +485,8 @@ See a specific user's information
 See the full array of class types
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 [
     {
@@ -499,7 +539,8 @@ See the full array of class types
 get a specific class type
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
     {
         "type_id": 10,
@@ -520,7 +561,8 @@ Create a new class type
 > must be an instructor
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 {
     "message": "Type created",
@@ -544,7 +586,8 @@ Create a new class type
 Get all Class reservations, ordered by class id. Instructors Only
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 [
     {
@@ -590,7 +633,8 @@ Get all Class reservations, ordered by class id. Instructors Only
 Get all Class reservations of a certain user, ordered by date
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 [
     {
@@ -645,7 +689,8 @@ Reserve a spot in a class
 ```
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 {
     "message": "Spot Reserved",
@@ -674,7 +719,8 @@ Reserve a spot in a class
 Remove a User's Reservation
 
 <details>
-
+<summary>What You Should Receive</summary>
+	
 ```JSON
 {
     "message": "Reservation removed",
