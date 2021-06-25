@@ -69,13 +69,14 @@ Create a new user or instructor.
 Auth Code to create a new instructor: 'steakOnAMonday'
 
 > **_ Required information _**
-> username, 
+> username,
 > password
 
 > **_ Optional information _**
-> authCode (to be recognized as an instructor: steakOnAMonday), 
+> authCode (to be recognized as an instructor: steakOnAMonday),
 > if no code or wrong code entered, role_id defaults to '1', aka 'client'
 
+<summary>What You Should Receive</summary>
 <details>
 
 ```JSON
@@ -92,18 +93,18 @@ Auth Code to create a new instructor: 'steakOnAMonday'
 
 </details>
 
-##### [POST] /api/users/login
+### [POST] /api/users/login
 
 Logs in a user, receives a token for authorization
 
 > **_ Required information _**
-> ~ in body ~ 
-> username, 
+> ~ in body ~
+> username,
 > password
 
 <details>
 
-```JSON
+````JSON
 {
     "user_id": 4,
     "role_name": "instructor",
@@ -115,7 +116,7 @@ Logs in a user, receives a token for authorization
 
 ## Classes
 
-##### [GET] /api/classes
+### [GET] /api/classes
 
 See the full array of classes
 
@@ -163,11 +164,11 @@ See the full array of classes
         "type_id": 2
     }
 ]
-```
+````
 
 </details>
 
-##### [GET] /api/classes/search
+### [GET] /api/classes/search
 
 See a list of classes by the search criteria
 
@@ -229,12 +230,12 @@ See a list of classes by the search criteria
 
 </details>
 
-##### [GET] /api/classes/type
+### [GET] /api/classes/type
 
 See a list of classes by the type
 
 > **_ Required information _**
-> ~ in body ~ 
+> ~ in body ~
 
      ```
      { type: "yoga" }
@@ -263,7 +264,7 @@ See a list of classes by the type
 
 </details>
 
-##### [GET] /api/classes/:class_id
+### [GET] /api/classes/:class_id
 
 See the class's data by a class_id
 
@@ -287,24 +288,24 @@ See the class's data by a class_id
 
 </details>
 
-##### [POST] /api/classes/
+### [POST] /api/classes/
 
 **_RESTRICTED ENDPOINT_**
 
 Instructor can create a class
 
 > **_ Required information _**
-> class_name, 
-> location, 
-> date - YYYY/MM/DD, 
-> start_time - HH:MM:SS, 
+> class_name,
+> location,
+> date - YYYY/MM/DD,
+> start_time - HH:MM:SS,
 > type_id
 
 > **_ Optional information _**
-> intensity - positive integer, defaults to 1, 
-> max_class_size - positive integer, defaults to 5, 
-> duration - HH:MM:SS, defaults to 00:30:00, 
-> current_class_size - positive integer, defaults to 0, 
+> intensity - positive integer, defaults to 1,
+> max_class_size - positive integer, defaults to 5,
+> duration - HH:MM:SS, defaults to 00:30:00,
+> current_class_size - positive integer, defaults to 0,
 > class_description
 
 <details>
@@ -330,15 +331,15 @@ Instructor can create a class
 
 </details>
 
-##### [PATCH] /api/classes/:class_id
+### [PATCH] /api/classes/:class_id
 
 **_RESTRICTED ENDPOINT_**
 
 Instructor can edit a class's information using the class_id
 
 > **_ Required information _**
-> Only information provided in the body will update in selected class, 
-> { intensity: "6" } - Works, 
+> Only information provided in the body will update in selected class,
+> { intensity: "6" } - Works,
 > { intensit: "6" } - Does not work
 
 <details>
@@ -364,7 +365,7 @@ Instructor can edit a class's information using the class_id
 
 </details>
 
-##### [DELETE] /api/classes/:class_id
+### [DELETE] /api/classes/:class_id
 
 **_RESTRICTED ENDPOINT_**
 
@@ -395,7 +396,7 @@ Instructor can remove a class using the class_id
 
 ## Users
 
-##### [GET] /api/users
+### [GET] /api/users
 
 **_RESTRICTED ENDPOINT_**
 
@@ -429,7 +430,7 @@ See the full array of users
 ```
 
 </details>
-##### [post] /api/users/
+### [post] /api/users/
 
 **_RESTRICTED ENDPOINT_**
 
@@ -447,8 +448,7 @@ Changes on_boarding status
 
 </details>
 
-
-##### [GET] /api/users/:user_id
+### [GET] /api/users/:user_id
 
 **_RESTRICTED ENDPOINT_**
 
@@ -468,7 +468,7 @@ See a specific user's information
 
 ## Types
 
-##### [GET] /api/types
+### [GET] /api/types
 
 See the full array of class types
 
@@ -521,7 +521,7 @@ See the full array of class types
 
 </details>
 
-##### [GET] /api/types/:type_id
+### [GET] /api/types/:type_id
 
 get a specific class type
 
@@ -536,14 +536,14 @@ get a specific class type
 
 </details>
 
-##### [POST] /api/types
+### [POST] /api/types
 
 **_RESTRICTED ENDPOINT_**
 
 Create a new class type
 
 > **_ Required information _**
-> unique type_name, 
+> unique type_name,
 > must be an instructor
 
 <details>
@@ -564,7 +564,7 @@ Create a new class type
 
 **_ For checking, making, and deleting class reservations _**
 
-##### [GET] /api/user-classes
+### [GET] /api/user-classes
 
 **_RESTRICTED ENDPOINT_**
 
@@ -605,11 +605,12 @@ Get all Class reservations, ordered by class id. Instructors Only
         "class_id": 3
     }
 ]
-	
+
 ```
+
 </details>
 
-##### [GET] /api/user-classes/:user_id
+### [GET] /api/user-classes/:user_id
 
 **_RESTRICTED ENDPOINT_**
 
@@ -650,11 +651,12 @@ Get all Class reservations of a certain user, ordered by date
         "type_id": 2
     }
 ]
-	
+
 ```
+
 </details>
 
-##### [POST] /api/user-classes
+### [POST] /api/user-classes
 
 **_RESTRICTED ENDPOINT_**
 
@@ -692,7 +694,7 @@ Reserve a spot in a class
 
 </details>
 
-##### [DELETE] /api/user-classes/:user_id/:class_id
+### [DELETE] /api/user-classes/:user_id/:class_id
 
 **_RESTRICTED ENDPOINT_**
 
