@@ -4,7 +4,7 @@
 
 ### What To Know About This API
 
-I've made a LOT of endpoints. Some will be useful, some are just for reference. JSON examples listed underneath this list. Don't care about reference? These are the ones you want:
+I've made a LOT of endpoints. Some will be useful, some are just for reference. JSON examples listed underneath this list.
 
 ### [GET] /api/classes/
 
@@ -13,10 +13,6 @@ See the list of classes w/ data
 ### [GET] /api/classes/:class_id
 
 See a class's data at a :class_id
-
-### [GET] /api/type
-
-Can search for classes by type
 
 ### [GET] /api/classes/search
 
@@ -40,44 +36,40 @@ Instructor can edit a class's information using the class_id
 
 Instructor can remove a class using the class_id
 
-### [GET] /api/users/
-
-**_RESTRICTED ENDPOINT_**
-
-Instructor can see a list of users w/ information
-
-### [GET] /api/users/:user_id
-
-**_RESTRICTED ENDPOINT_**
-
-Instructor can see a specific user's information
-
-### [POST] /api/auth/register
-
-Create a new user or instructor.
-Auth Code to create a new instructor: 'steakOnAMonday'
-
-### [POST] /api/auth/login
-
-Logs in a user, receives a token for authorization
-
-## Register / Login
-
-### [POST] /api/auth/register
-
-Create a new user or instructor.
-Auth Code to create a new instructor: 'steakOnAMonday'
-
-> **_ Required information _**
-> username,
-> password
-
-> **_ Optional information _**
-> authCode (to be recognized as an instructor: steakOnAMonday),
-> if no code or wrong code entered, role_id defaults to '1', aka 'client'
-
-<summary>What You Should Receive</summary>
 <details>
+<summary>What You Send</summary>
+
+```JSON
+
+
+```
+
+</details>
+
+## ---------- REGISTER / LOGIN ----------
+
+### [POST] /api/auth/register
+
+Create a new user or instructor.
+Auth Code to create a new instructor: 'steakOnAMonday'
+Otherwise, defaults to "client"
+
+<details>
+<summary>What You Send</summary>
+
+```JSON
+{
+	"username": "Bob"
+	"password": "itsapassword"
+	"authCode": "steakOnAMonday"
+}
+
+```
+
+</details>
+
+<details>
+<summary>What You Should Receive</summary>
 
 ```JSON
 
@@ -97,24 +89,35 @@ Auth Code to create a new instructor: 'steakOnAMonday'
 
 Logs in a user, receives a token for authorization
 
-> **_ Required information _**
-> ~ in body ~
-> username,
-> password
+<details>
+<summary>What You Send</summary>
+
+```JSON
+{
+	"username": "Bob"
+	"password": "itsapassword"
+}
+
+```
+
+</details>
 
 <details>
+<summary>What You Should Receive</summary>
 
-````JSON
+```JSON
+
 {
     "user_id": 4,
     "role_name": "instructor",
     "message": "Welcome, Daniel!",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo0LCJ1c2VybmFtZSI6IkRhbmllbCIsInJvbGVfbmFtZSI6Imluc3RydWN0b3IiLCJpYXQiOjE2MjQ1NTA1MTIsImV4cCI6MTYyNDYzNjkxMn0.MpT2wondgaS0y2Oxx7-G7GaWqvmOppKVj0GvUkNaUbc"
 }
+```
 
 </details>
 
-## Classes
+## ---------- CLASSES ----------
 
 ### [GET] /api/classes
 
@@ -164,7 +167,7 @@ See the full array of classes
         "type_id": 2
     }
 ]
-````
+```
 
 </details>
 
@@ -394,7 +397,7 @@ Instructor can remove a class using the class_id
 
 </details>
 
-## Users
+## ---------- USERS ----------
 
 ### [GET] /api/users
 
@@ -466,7 +469,7 @@ See a specific user's information
 
 </details>
 
-## Types
+## ---------- TYPES ----------
 
 ### [GET] /api/types
 
@@ -560,7 +563,7 @@ Create a new class type
 
 </details>
 
-## User-Classes
+## ---------- USER-CLASSES ----------
 
 **_ For checking, making, and deleting class reservations _**
 
